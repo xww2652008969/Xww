@@ -1,0 +1,9 @@
+C:\Users\w\source\repos\xww\obj\Release\xww.csproj.AssemblyReference.cache
+C:\Users\w\source\repos\xww\obj\Release\xww.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\w\source\repos\xww\obj\Release\xww.csproj.CoreCompileInputs.cache
+D:\ff\ae\ACR\wacr\xww.deps.json
+D:\ff\ae\ACR\wacr\xww.dll
+C:\Users\w\source\repos\xww\obj\Release\xww.csproj.Up2Date
+C:\Users\w\source\repos\xww\obj\Release\xww.dll
+D:\ff\ae\ACR\Xww\xww.deps.json
+D:\ff\ae\ACR\Xww\xww.dll
