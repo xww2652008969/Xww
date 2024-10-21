@@ -1,4 +1,6 @@
-﻿using AEAssist.CombatRoutine.View.JobView;
+﻿using System;
+using System.IO;
+using AEAssist.CombatRoutine.View.JobView;
 using AEAssist.Helper;
 using AEAssist.IO;
 using AEAssist;

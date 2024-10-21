@@ -3,6 +3,7 @@ using AEAssist.CombatRoutine;
 using AEAssist.CombatRoutine.Module;
 using AEAssist.CombatRoutine.View;
 using AEAssist.Extension;
+using ImGuiNET;
 using Xww.vp;
 
 namespace xww.vp
@@ -59,6 +60,7 @@ namespace xww.vp
 
         public void OnEnterRotation()
         {
+            Core.Resolve<global::AEAssist.MemoryApi.MemApiChatMessage>().Toast2("欢迎使用蝰蛇绿色ACR\n目前适合普通日随\n有些副本有需要停手的请qt选择停手\n目前也适合打7.0的2个极神",1,6000);
             return;
         }
 

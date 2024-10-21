@@ -31,9 +31,19 @@
     <Reference Include="Dalamud">
       <HintPath>..\..\..\AppData\Roaming\XIVLauncher\addon\Hooks\dev\Dalamud.dll</HintPath>
     </Reference>
+    <Reference Include="HSS">
+      <HintPath>D:\ff\ae\ACR\HSS\HSS.dll</HintPath>
+    </Reference>
     <Reference Include="ImGui.NET">
       <HintPath>..\..\..\AppData\Roaming\XIVLauncher\addon\Hooks\dev\ImGui.NET.dll</HintPath>
     </Reference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.NETFramework.ReferenceAssemblies" Version="1.0.3">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
   </ItemGroup>
 
 </Project>
