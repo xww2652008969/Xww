@@ -1,10 +1,14 @@
 ﻿
+using System.Numerics;
+using AEAssist;
 using AEAssist.CombatRoutine;
 using AEAssist.CombatRoutine.Module;
 
 using AEAssist.CombatRoutine.View.JobView;
 using AEAssist.CombatRoutine.View.JobView.HotkeyResolver;
-
+using AEAssist.Extension;
+using AEAssist.Helper;
+using ImGuiNET;
 using xww.vp;
 using Xww.vp;
 
@@ -46,6 +50,7 @@ namespace Xww
         {
             Viper.QT = new JobViewWindow(JOBSettings.Instance.JobViewSave, JOBSettings.Instance.Save, OverlayTitle);
             // Viper.QT.AddTab("通用", DrawQtGeneral);
+            QT.AddTab("TP",Tp);
             Viper.QT.AddQt(Qtkey.动态真北,true,"动态真北");
             Viper.QT.AddQt(Qtkey.收尾,false,"倾斜资源");
             Viper.QT.AddQt(Qtkey.飞蛇之尾,true,"过远就飞蛇尾");
@@ -82,6 +87,47 @@ namespace Xww
         public void DrawQtGeneral(JobViewWindow jobViewWindow)
         {
             // ImGui.TextUnformatted("画通用信息");
+        }
+
+        public void Tp(JobViewWindow jobViewWindow)
+        {
+            foreach (var p in PartyHelper.CastableTanks)
+            {
+                
+                if (p!=Core.Me)
+                {
+                    if (ImGui.Button(p.Name.ToString()))
+                    {
+                        Core.Me.SetPos(p.Position);
+                    }
+                }
+            }
+
+            foreach (var p in PartyHelper.CastableHealers)
+            {
+                
+                if (p!=Core.Me)
+                {
+                    Core.Me.SetPos(p.Position);
+                }
+            }
+
+            foreach (var p in PartyHelper.CastableDps)
+            {
+                if (p!=Core.Me)
+                {
+                    Core.Me.SetPos(p.Position);
+                }
+            }
+            // foreach (var p in PartyHelper.Party)
+            // {
+            //     
+            //     if (ImGui.Button(p.Name.ToString()))
+            //     {
+            //         
+            //         // LogHelper.Print(jobdata.Job[p.CurrentJob().ToString()]);
+            //     }
+            // }
         }
     } 
 }
