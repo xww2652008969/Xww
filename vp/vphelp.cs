@@ -1,6 +1,7 @@
 ﻿using System.Numerics;
 using AEAssist;
 using AEAssist.CombatRoutine.Module;
+using AEAssist.CombatRoutine.View;
 using AEAssist.Extension;
 using AEAssist.Helper;
 using AEAssist.MemoryApi;
@@ -106,7 +107,6 @@ namespace Xww.vp
         {
             if (ReflectionHelp.IsValueInClass<uint>(typeof(VpGcdSpellid), i))
             {
-                Task.Delay(Core.Resolve<MemApiSpell>().GetGCDDuration()).ContinueWith(_ => Vphelp.Tp2(1));
                 Vpjobdata.LastGcdid = i;
 
             }
@@ -170,7 +170,7 @@ namespace Xww.vp
 
         public static void Tp(int i)
         {
-            return;
+            var aa = Core.Me.Position;
             var a = Core.Me.GetCurrTarget();
             if (i == 1)
             {
@@ -180,6 +180,7 @@ namespace Xww.vp
                 var b = new Vector3(x, 0, z);
                 var c = a.Position + a.HitboxRadius * b;
                 Core.Me.SetPos(c);
+                 Task.Delay(500).ContinueWith(_=> Core.Me.SetPos(aa));
             }
 
             if (i == 2)
@@ -190,6 +191,7 @@ namespace Xww.vp
                 var b = new Vector3(x, 0, z);
                 var c = a.Position + a.HitboxRadius * b;
                 Core.Me.SetPos(c);
+                 Task.Delay(500).ContinueWith(_=> Core.Me.SetPos(aa));
             }
 
         }
@@ -217,6 +219,39 @@ namespace Xww.vp
                 var b = new Vector3(x, 0, z);
                 var c = a.Position + a.HitboxRadius * b;
                 Core.Me.SetPos(c);
+            }
+        }
+
+        public static void drw()
+        {
+            if (Core.Me.HasAura(Vpbuff.祖灵降临buff)||Core.Me.HasAura(Vpbuff.真北))
+            {
+                MeleePosHelper.Draw(MeleePosHelper.Pos.Flank,0);
+                return;//祖灵状态和真北不打身位去掉
+            }
+            if ((Vpjobdata.LastGcdid != VpGcdSpellid.强碎灵蛇&& Vpjobdata.LastGcdid!=VpGcdSpellid.疾速盘蛇) &&(!Core.Me.HasAura(Vpbuff.祖灵降临buff)||Core.Me.HasAura(Vpbuff.真北)))//不打蛇连且不在祖灵状态
+            {
+                if (Core.Me.HasAura(Vpbuff.背击锐牙) || Core.Me.HasAura(Vpbuff.背裂锐牙)||!Core.Me.HasAura(Vpbuff.侧击锐牙) || !Core.Me.HasAura(Vpbuff.侧裂锐牙))
+                {
+                    MeleePosHelper.Draw(MeleePosHelper.Pos.Behind, 100);
+                }
+                if (Core.Me.HasAura(Vpbuff.侧击锐牙) || Core.Me.HasAura(Vpbuff.侧裂锐牙))
+                {
+                    MeleePosHelper.Draw(MeleePosHelper.Pos.Flank, 100);
+                }
+            }
+            if(Vpjobdata.LastGcdid==VpGcdSpellid.强碎灵蛇  || Vpjobdata.LastGcdid == VpGcdSpellid.疾速盘蛇)
+            {
+                if(Vpjobdata.LastGcdid == VpGcdSpellid.强碎灵蛇)
+                {
+                    MeleePosHelper.Draw(MeleePosHelper.Pos.Behind, 100);
+                    return;
+                }
+                if( Vpjobdata.LastGcdid == VpGcdSpellid.疾速盘蛇)
+                {
+                    MeleePosHelper.Draw(MeleePosHelper.Pos.Flank, 100);
+                    return;
+                }
             }
         }
     }

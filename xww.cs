@@ -57,7 +57,7 @@ namespace Xww
             }
             LogHelper.Print(AEAssist.Share.LocalContentId);
             
-            Viper.QT.AddQt(Qtkey.动态真北,true,"动态真北");
+            Viper.QT.AddQt(Qtkey.动态真北,false,"动态真北");
             Viper.QT.AddQt(Qtkey.收尾,false,"倾斜资源");
             Viper.QT.AddQt(Qtkey.飞蛇之尾,true,"过远就飞蛇尾");
             Viper.QT.AddQt(Qtkey.停手, false,"停手不打技能");

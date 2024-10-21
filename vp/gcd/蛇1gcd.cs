@@ -11,7 +11,9 @@ namespace xww.vp
         {
             if (VpGcdSpellid.猛袭盘蛇.IsReady()||VpGcdSpellid.疾速盘蛇.IsReady())
             {
+                Vphelp.Tp(1);
                 Vphelp.Ss1(slot);
+                return;
             }
             else
             {

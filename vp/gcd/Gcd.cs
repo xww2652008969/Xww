@@ -53,22 +53,26 @@ public class Basegcd : ISlotResolver  //基础连击
         {
             if (Core.Me.HasAura(Vpbuff.背击锐牙))
             {
+                Vphelp.Tp(2);
                 return VpGcdSpellid.背击獠齿.GetSpell();
             }
             if (Core.Me.HasAura(Vpbuff.背裂锐牙))
             {
-                
+                Vphelp.Tp(2);
                 return VpGcdSpellid.背裂獠齿.GetSpell();
             }
             if (Core.Me.HasAura(Vpbuff.侧击锐牙))
             {
+                Vphelp.Tp(1);
                 return VpGcdSpellid.侧击獠齿.GetSpell();
                
             }
             if (Core.Me.HasAura(Vpbuff.侧裂锐牙))
             {
+                Vphelp.Tp(1);
                 return VpGcdSpellid.侧裂獠齿.GetSpell();
             }
+            Vphelp.Tp(2);
         }
 
         return VpGcdSpellid.咬噬尖齿.GetSpell();
