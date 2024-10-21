@@ -24,10 +24,10 @@ namespace Xww.vp
             {
                 return -1001;  
             }
-            if (Vphelp.Distance() > 3.0)
-            {
-                return -3;
-            }
+            // if (Vphelp.Distance() > 3.0)
+            // {
+            //     return -3;
+            // }
             if (!Core.Me.HasAura(Vpbuff.疾速) ||! Core.Me.HasAura(Vpbuff.猛袭))
             {
                 return -2;  //没buff 还想打爆发？？？
@@ -75,22 +75,27 @@ namespace Xww.vp
             {
                 if (Core.Resolve<JobApi_Viper>().AnguineTribute== 5)
                 {
+                    Vphelp.Tp(0);
                     return VpGcdSpellid.祖灵之牙一式.GetSpell();
                 }
                 if (Core.Resolve<JobApi_Viper>().AnguineTribute == 4)
                 {
+                    Vphelp.Tp(0);
                     return VpGcdSpellid.祖灵之牙二式.GetSpell();
                 }
                 if (Core.Resolve<JobApi_Viper>().AnguineTribute == 3)
                 {
+                    Vphelp.Tp(0);
                     return VpGcdSpellid.祖灵之牙三式.GetSpell();
                 }
                 if (Core.Resolve<JobApi_Viper>().AnguineTribute == 2)
                 {
+                    Vphelp.Tp(0);
                     return VpGcdSpellid.祖灵之牙四式.GetSpell();
                 }
                 if (Core.Resolve<JobApi_Viper>().AnguineTribute == 1)
                 {
+                    Vphelp.Tp(0);
                     return VpGcdSpellid.祖灵大蛇牙.GetSpell();
                 }
             }
@@ -98,21 +103,26 @@ namespace Xww.vp
             {
                 if (Core.Resolve<JobApi_Viper>().AnguineTribute == 4)
                 {
+                    Vphelp.Tp(0);
                     return VpGcdSpellid.祖灵之牙一式.GetSpell();
                 }
                 if (Core.Resolve<JobApi_Viper>().AnguineTribute == 3)
                 {
+                    Vphelp.Tp(0);
                     return VpGcdSpellid.祖灵之牙二式.GetSpell();
                 }
                 if (Core.Resolve<JobApi_Viper>().AnguineTribute == 2)
                 {
+                    Vphelp.Tp(0);
                     return VpGcdSpellid.祖灵之牙三式.GetSpell();
                 }
                 if (Core.Resolve<JobApi_Viper>().AnguineTribute == 1)
                 {
+                    Vphelp.Tp(0);
                     return VpGcdSpellid.祖灵之牙四式.GetSpell();
                 }
             }
+            Vphelp.Tp(0);
             return VpGcdSpellid.祖灵降临.GetSpell();
         }
     }

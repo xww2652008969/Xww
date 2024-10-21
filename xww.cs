@@ -55,7 +55,7 @@ namespace Xww
             {
                 QT.AddTab("通用", DrawQtGeneral);  //自己查看信息的
             }
-            LogHelper.Print(AEAssist.Share.LocalContentId);
+            LogHelper.Print("??");
             
             Viper.QT.AddQt(Qtkey.动态真北,false,"动态真北");
             Viper.QT.AddQt(Qtkey.收尾,false,"倾斜资源");
@@ -78,12 +78,13 @@ namespace Xww
         }
         public List<SlotResolverData> ViperSlotResolvers = new()
         {
+            
              new(new 祖灵gcd(),SlotMode.Gcd),
             new(new 蛇1gcd(),SlotMode.Gcd),    //蛇连击优先级高
            new(new 蛇2gcd(),SlotMode.Gcd),
            new SlotResolverData(new 蛇aoe(),SlotMode.Gcd),
            new(new 飞蛇gcd(),SlotMode.Gcd),
-           new SlotResolverData(new 飞蛇之牙gcd(),SlotMode.Gcd),
+           // new SlotResolverData(new 飞蛇之牙gcd(),SlotMode.Gcd),
            new(new Basegcd(),SlotMode.Gcd),
            new(new Vpaoe(),SlotMode.Gcd),
             new SlotResolverData(new 真北(),SlotMode.OffGcd),

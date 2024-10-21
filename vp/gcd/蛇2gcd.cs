@@ -8,15 +8,12 @@ namespace Xww.vp
     {
         public void Build(Slot slot)
         {
-            if (VpGcdSpellid.猛袭盘蛇.IsReady()&&!VpGcdSpellid.疾速盘蛇.IsReady())
+            if (Vpjobdata.get蛇数() == 2)
             {
                 Vphelp.Tp(1);
                 Vphelp.Ss2(slot);
+                Vpjobdata.蛇数();
                 return;
-            }
-            else
-            {
-                slot.Add(VpGcdSpellid.强碎灵蛇.GetSpell());
             }
 
         }
@@ -27,10 +24,10 @@ namespace Xww.vp
             {
                 return -1001;  
             }
-            if (Vphelp.Distance() > 3.0)
-            {
-                return -3;
-            }
+            // if (Vphelp.Distance() > 3.0)
+            // {
+            //     return -3;
+            // }
             if (Vphelp.Checkaoe())
             {
                 return -100;
@@ -39,19 +36,15 @@ namespace Xww.vp
             {
                 return -65;
             }
-            if (!VpGcdSpellid.疾速盘蛇.IsReady()&& VpGcdSpellid.猛袭盘蛇.IsReady())
+            if (Vpjobdata.get蛇数() == 2)
             {
-                return 2;
+                return 1;
             }
             if (QT.QTGET("留资源")&&!VpGcdSpellid.猛袭盘蛇.IsReady()&&!VpGcdSpellid.疾速盘蛇.IsReady())
             {
                 return -20;
             }
             if (QT.QTGET("收尾")&&VpGcdSpellid.猛袭盘蛇.IsReady()&&Vphelp.GetVicewinderCharges()>=1.0)
-            {
-                return 1;
-            }
-            if (1.75 <= Vphelp.GetVicewinderCharges() && Vphelp.GetVicewinderCharges() <= 2.0)  //不让蛇连击溢出
             {
                 return 1;
             }

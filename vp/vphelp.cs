@@ -170,8 +170,22 @@ namespace Xww.vp
 
         public static void Tp(int i)
         {
+            if (Core.Resolve<MemApiSpell>().GetGCDDuration() == 0)
+            {
+                return;
+            }
             var aa = Core.Me.Position;
             var a = Core.Me.GetCurrTarget();
+            if (i == 0)
+            {
+                float facingAngle = a.Rotation;
+                float x = MathF.Sin(facingAngle); //x
+                float z = MathF.Cos(facingAngle); //y
+                var b = new Vector3(x, 0, z);
+                var c = a.Position + a.HitboxRadius * b;
+                Core.Me.SetPos(c);
+                Task.Delay(Core.Resolve<MemApiSpell>().GetGCDDuration()-700).ContinueWith(_=> Core.Me.SetPos(aa));
+            }
             if (i == 1)
             {
                 float facingAngle = a.Rotation + MathF.PI / 2;
@@ -180,7 +194,7 @@ namespace Xww.vp
                 var b = new Vector3(x, 0, z);
                 var c = a.Position + a.HitboxRadius * b;
                 Core.Me.SetPos(c);
-                 Task.Delay(500).ContinueWith(_=> Core.Me.SetPos(aa));
+                 Task.Delay(Core.Resolve<MemApiSpell>().GetGCDDuration()-700).ContinueWith(_=> Core.Me.SetPos(aa));
             }
 
             if (i == 2)
@@ -191,7 +205,7 @@ namespace Xww.vp
                 var b = new Vector3(x, 0, z);
                 var c = a.Position + a.HitboxRadius * b;
                 Core.Me.SetPos(c);
-                 Task.Delay(500).ContinueWith(_=> Core.Me.SetPos(aa));
+                 Task.Delay(Core.Resolve<MemApiSpell>().GetGCDDuration()-700).ContinueWith(_=> Core.Me.SetPos(aa));
             }
 
         }

@@ -9,6 +9,7 @@ namespace Xww.vp
     {
         public void Build(Slot slot)
         {
+            Vphelp.Tp(0);
             slot.Add(VpGcdSpellid.飞蛇之尾.GetSpell());
             if (Core.Me.Level<92)
             {
@@ -29,10 +30,10 @@ namespace Xww.vp
             {
                 return -82;
             }
-            if (Vphelp.Distance() > 20.0)
-            {
-                return -20;
-            }
+            // if (Vphelp.Distance() > 20.0)
+            // {
+            //     return -20;
+            // }
 
             if (QT.QTGET("留资源"))
             {

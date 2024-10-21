@@ -22,14 +22,17 @@ public class Basegcd : ISlotResolver  //基础连击
         {
             if (Core.Me.Level < 10)
             {
+                Vphelp.Tp(0);
                 return VpGcdSpellid.咬噬尖齿.GetSpell();
             }
             if (Core.Me.HasAura(Vpbuff.穿裂锐牙))
             {
+                Vphelp.Tp(0);
                 return VpGcdSpellid.穿裂尖齿.GetSpell();
             }
             if (Core.Me.HasAura(Vpbuff.咬噬锐牙))
             {
+                Vphelp.Tp(0);
                 return VpGcdSpellid.咬噬尖齿.GetSpell();
             }
         }
@@ -37,16 +40,20 @@ public class Basegcd : ISlotResolver  //基础连击
         {
             if (Core.Me.Level < 20)
             {
+                Vphelp.Tp(0);
                 return VpGcdSpellid.猛袭利齿.GetSpell();
             }
             if (Core.Me.HasAura(Vpbuff.背击锐牙) || Core.Me.HasAura(Vpbuff.背裂锐牙))
             {
+                Vphelp.Tp(0);
                 return VpGcdSpellid.疾速利齿.GetSpell();
             }
             if (Core.Me.HasAura(Vpbuff.侧击锐牙) || Core.Me.HasAura(Vpbuff.侧裂锐牙))
             {
+                Vphelp.Tp(0);
                 return VpGcdSpellid.猛袭利齿.GetSpell();
             }
+            Vphelp.Tp(0);
             return VpGcdSpellid.疾速利齿.GetSpell();
         }
         if (Vphelp.GetLastCombo() == 3)//状态3 后面需要写身位判定先这样写吧
@@ -72,9 +79,8 @@ public class Basegcd : ISlotResolver  //基础连击
                 Vphelp.Tp(1);
                 return VpGcdSpellid.侧裂獠齿.GetSpell();
             }
-            Vphelp.Tp(2);
         }
-
+        Vphelp.Tp(0);
         return VpGcdSpellid.咬噬尖齿.GetSpell();
     }
 
@@ -88,10 +94,10 @@ public class Basegcd : ISlotResolver  //基础连击
         {
             return -100;
         }
-        if (Vphelp.Distance() > 3.0)
-        {
-            return -3;
-        }
+        // if (Vphelp.Distance() > 3.0)
+        // {
+        //     return -3;
+        // }
         if((VpGcdSpellid.猛袭盘蛇.IsReady() || VpGcdSpellid.疾速盘蛇.IsReady()))
         {
             return -3;   //如果使用连连击后  禁止使用基础连击打断

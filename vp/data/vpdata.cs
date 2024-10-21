@@ -84,9 +84,24 @@
         public static uint LastGcdid { get; set; }
         public static uint LastOffGcdid { get; set; }
         public static uint NextGcdid { get; set; }
+        private static int 蛇count = 0;
         public static bool 蛇0lunck {  get; set; }  //bool表示不能使用
         public static bool 蛇1lunck {  get; set; }//bool 表示不能使用
         public static bool 蛇2lunck {  get; set; }//bool 表示不能用
+
+        public static void 蛇数()
+        {
+            蛇count++;
+            if (蛇count==3)
+            {
+                蛇count = 0;
+            }
+        }
+
+        public static int get蛇数()
+        {
+            return 蛇count;
+        }
         static Vpjobdata()
         {
             LastGcdid = initid();
