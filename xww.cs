@@ -46,7 +46,6 @@ namespace Xww
         {
             Viper.QT = new JobViewWindow(JOBSettings.Instance.JobViewSave, JOBSettings.Instance.Save, OverlayTitle);
             // Viper.QT.AddTab("通用", DrawQtGeneral);
-            
             Viper.QT.AddQt(Qtkey.动态真北,true,"动态真北");
             Viper.QT.AddQt(Qtkey.收尾,false,"倾斜资源");
             Viper.QT.AddQt(Qtkey.飞蛇之尾,true,"过远就飞蛇尾");
