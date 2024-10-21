@@ -60,7 +60,7 @@ namespace xww.vp
 
         public void OnEnterRotation()
         {
-            Core.Resolve<global::AEAssist.MemoryApi.MemApiChatMessage>().Toast2("欢迎使用蝰蛇绿色ACR\n目前适合普通日随\n有些副本有需要停手的请qt选择停手\n目前也适合打7.0的2个极神",1,6000);
+            Core.Resolve<global::AEAssist.MemoryApi.MemApiChatMessage>().Toast2("欢迎使用蝰蛇绿色ACR\n目前适合普通日随\n有些副本有需要停手的请qt选择停手\n目前也适合打7.0的2个极神\nTP队友功能别乱用哦，别乱用哦",1,6000);
             return;
         }
 
