@@ -1,5 +1,5 @@
 ﻿
-using System.Numerics;
+using Dalamud.Game.Command;
 using AEAssist;
 using AEAssist.CombatRoutine;
 using AEAssist.CombatRoutine.Module;
@@ -9,6 +9,7 @@ using AEAssist.CombatRoutine.View.JobView.HotkeyResolver;
 using AEAssist.Extension;
 using AEAssist.Helper;
 using AEAssist.MemoryApi;
+using AEAssist.Verify;
 using ImGuiNET;
 using xww.vp;
 using Xww.vp;
@@ -49,27 +50,30 @@ namespace Xww
         }
         public void BuildQT()
         {
+            
             Viper.QT = new JobViewWindow(JOBSettings.Instance.JobViewSave, JOBSettings.Instance.Save, OverlayTitle);
             // Viper.QT.AddTab("通用", DrawQtGeneral);
             if (AEAssist.Share.LocalContentId == "18014469510992065")
             {
+                LogHelper.Print("成功");
                 QT.AddTab("通用", DrawQtGeneral);  //自己查看信息的
             }
             LogHelper.Print(AEAssist.Share.LocalContentId);
-            
-            Viper.QT.AddQt(Qtkey.动态真北,false,"动态真北");
-            Viper.QT.AddQt(Qtkey.收尾,false,"倾斜资源");
-            Viper.QT.AddQt(Qtkey.飞蛇之尾,true,"过远就飞蛇尾");
-            Viper.QT.AddQt(Qtkey.停手, false,"停手不打技能");
-            Viper.QT.AddQt(Qtkey.留资源,false,"保留资源不打小怪");
+            if (Share.VIP.Level>=VIPLevel.VIP1)
+            {
+             
+            }
+            QT.AddQt(Qtkey.动态真北,false,"动态真北");
+            QT.AddQt(Qtkey.收尾,false,"倾斜资源");
+            QT.AddQt(Qtkey.飞蛇之尾,true,"过远就飞蛇尾");
+            QT.AddQt(Qtkey.停手, false,"停手不打技能");
+            QT.AddQt(Qtkey.留资源,false,"保留资源不打小怪");
             QT.AddHotkey("内丹", new HotKeyResolver_NormalSpell(7541,SpellTargetType.Self));
             QT.AddHotkey("亲疏自行", new HotKeyResolver_NormalSpell(7548,SpellTargetType.Self));
             QT.AddHotkey("浴血", new HotKeyResolver_NormalSpell(7542,SpellTargetType.Self));
             QT.AddHotkey("蛇行", new HotKeyResolver_NormalSpell(34646,SpellTargetType.Target));
             QT.AddHotkey("疾跑",new HotKeyResolver_疾跑());
             QT.AddHotkey("牵制",new HotKeyResolver_NormalSpell(7549,SpellTargetType.Target));
-            
-
 
         }
         public void OnDrawSetting()
@@ -92,8 +96,9 @@ namespace Xww
         };
         public void DrawQtGeneral(JobViewWindow jobViewWindow)
         {
-            ImGui.TextUnformatted("我的位置:"+Core.Me.Position.ToString());
-            ImGui.TextUnformatted("gcd"+Core.Resolve<MemApiSpell>().GetGCDDuration());
+
+            // ImGui.TextUnformatted("我的位置:"+Core.Me.Position.ToString());
+            // ImGui.TextUnformatted("gcd"+Core.Resolve<MemApiSpell>().GetGCDDuration());
             if (ImGui.Button("w"))
             {
                 // global::AEAssist.MemoryApi.WayMark[] wayMarks = new global::AEAssist.MemoryApi.WayMark[]
