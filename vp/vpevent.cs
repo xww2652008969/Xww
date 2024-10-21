@@ -3,6 +3,8 @@ using AEAssist.CombatRoutine;
 using AEAssist.CombatRoutine.Module;
 using AEAssist.CombatRoutine.View;
 using AEAssist.Extension;
+using AEAssist.Helper;
+using AEAssist.MemoryApi;
 using Xww.vp;
 
 namespace xww.vp
@@ -11,8 +13,6 @@ namespace xww.vp
     {
         public void AfterSpell(Slot slot, Spell spell)
         {
-            
-            
             Vphelp.Lastgcdid(spell.Id);
             if (spell.Id == VpGcdSpellid.强碎灵蛇 || spell.Id == VpGcdSpellid.猛袭盘蛇 || spell.Id == VpGcdSpellid.疾速盘蛇)
             {
@@ -22,6 +22,7 @@ namespace xww.vp
 
         public void OnBattleUpdate(int currTimeInMs)
         {
+            // LogHelper.Print(Core.Me.Position.ToString());
             if (QT.QTGET("留资源"))
             {
                 QT.QTSET("收尾",false);  //资源互斥
@@ -36,10 +37,12 @@ namespace xww.vp
                 if (Core.Me.HasAura(Vpbuff.背击锐牙) || Core.Me.HasAura(Vpbuff.背裂锐牙)||!Core.Me.HasAura(Vpbuff.侧击锐牙) || !Core.Me.HasAura(Vpbuff.侧裂锐牙))
                 {
                     MeleePosHelper.Draw(MeleePosHelper.Pos.Behind, 100);
+                    Vphelp.Tp(2);
                 }
                 if (Core.Me.HasAura(Vpbuff.侧击锐牙) || Core.Me.HasAura(Vpbuff.侧裂锐牙))
                 {
                     MeleePosHelper.Draw(MeleePosHelper.Pos.Flank, 100);
+                    Vphelp.Tp(1);
                 }
             }
             if(Vpjobdata.LastGcdid==VpGcdSpellid.强碎灵蛇  || Vpjobdata.LastGcdid == VpGcdSpellid.疾速盘蛇)
@@ -47,11 +50,13 @@ namespace xww.vp
                 if(Vpjobdata.LastGcdid == VpGcdSpellid.强碎灵蛇)
                 {
                     MeleePosHelper.Draw(MeleePosHelper.Pos.Behind, 100);
+                    Vphelp.Tp(2);
                     return;
                 }
                 if( Vpjobdata.LastGcdid == VpGcdSpellid.疾速盘蛇)
                 {
                     MeleePosHelper.Draw(MeleePosHelper.Pos.Flank, 100);
+                    Vphelp.Tp(1);
                     return;
                 }
             }

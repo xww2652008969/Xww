@@ -1,10 +1,15 @@
 ﻿
+using System.Numerics;
+using AEAssist;
 using AEAssist.CombatRoutine;
 using AEAssist.CombatRoutine.Module;
 
 using AEAssist.CombatRoutine.View.JobView;
 using AEAssist.CombatRoutine.View.JobView.HotkeyResolver;
-
+using AEAssist.Extension;
+using AEAssist.Helper;
+using AEAssist.MemoryApi;
+using ImGuiNET;
 using xww.vp;
 using Xww.vp;
 
@@ -46,6 +51,11 @@ namespace Xww
         {
             Viper.QT = new JobViewWindow(JOBSettings.Instance.JobViewSave, JOBSettings.Instance.Save, OverlayTitle);
             // Viper.QT.AddTab("通用", DrawQtGeneral);
+            if (AEAssist.Share.LocalContentId == "18014469510992065")
+            {
+                QT.AddTab("通用", DrawQtGeneral);  //自己查看信息的
+            }
+            LogHelper.Print(AEAssist.Share.LocalContentId);
             
             Viper.QT.AddQt(Qtkey.动态真北,true,"动态真北");
             Viper.QT.AddQt(Qtkey.收尾,false,"倾斜资源");
@@ -82,7 +92,29 @@ namespace Xww
         };
         public void DrawQtGeneral(JobViewWindow jobViewWindow)
         {
-            // ImGui.TextUnformatted("画通用信息");
+            ImGui.TextUnformatted("我的位置:"+Core.Me.Position.ToString());
+            ImGui.TextUnformatted("gcd"+Core.Resolve<MemApiSpell>().GetGCDDuration());
+            if (ImGui.Button("w"))
+            {
+                // global::AEAssist.MemoryApi.WayMark[] wayMarks = new global::AEAssist.MemoryApi.WayMark[]
+                // {
+                //     global::AEAssist.MemoryApi.WayMark.A,
+                //     global::AEAssist.MemoryApi.WayMark.B,
+                //     global::AEAssist.MemoryApi.WayMark.C,
+                //     global::AEAssist.MemoryApi.WayMark.D,
+                //     global::AEAssist.MemoryApi.WayMark.One,
+                //     global::AEAssist.MemoryApi.WayMark.Two,
+                //     global::AEAssist.MemoryApi.WayMark.Three,
+                //     global::AEAssist.MemoryApi.WayMark.Four
+                // };
+                // Core.Me.SetPos(Core.Resolve<MemApiMaker>().WayMarker(wayMarks[0]).Pos);
+               //
+                // LogHelper.Print(PartyHelper.Party[1].Position.ToString());
+      
+                // LogHelper.Print(Core.Me.GetCurrTarget().Rotation.ToString());
+                // LogHelper.Print(Core.Me.GetCurrTarget().HitboxRadius.ToString()); //目标圈大小
+                 //Core.Me.SetPos(PartyHelper.Party[1].Position);  //tp指定位置
+            }
         }
     } 
 }
