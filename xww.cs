@@ -3,7 +3,7 @@ using System.Numerics;
 using AEAssist;
 using AEAssist.CombatRoutine;
 using AEAssist.CombatRoutine.Module;
-
+using Dalamud.Game.Command;
 using AEAssist.CombatRoutine.View.JobView;
 using AEAssist.CombatRoutine.View.JobView.HotkeyResolver;
 using AEAssist.Extension;
@@ -22,6 +22,7 @@ namespace Xww
         public Rotation Build(string settingFolder)
 
         {
+            
             JOBSettings.Build(settingFolder);
             BuildQT();
             Rotation rot = new Rotation(ViperSlotResolvers)
@@ -51,6 +52,7 @@ namespace Xww
             Viper.QT = new JobViewWindow(JOBSettings.Instance.JobViewSave, JOBSettings.Instance.Save, OverlayTitle);
             // Viper.QT.AddTab("通用", DrawQtGeneral);
             QT.AddTab("TP队友",Tp);
+            QT.AddTab("TPB标点",Tp2);
             Viper.QT.AddQt(Qtkey.动态真北,true,"动态真北");
             Viper.QT.AddQt(Qtkey.收尾,false,"倾斜资源");
             Viper.QT.AddQt(Qtkey.飞蛇之尾,true,"过远就飞蛇尾");
@@ -91,6 +93,7 @@ namespace Xww
 
         public void Tp(JobViewWindow jobViewWindow)
         {
+            
             foreach (var p in PartyHelper.CastableTanks)
             {
                 
@@ -105,10 +108,12 @@ namespace Xww
 
             foreach (var p in PartyHelper.CastableHealers)
             {
-                
                 if (p!=Core.Me)
                 {
-                    Core.Me.SetPos(p.Position);
+                    if (ImGui.Button(p.Name.ToString()))
+                    {
+                        Core.Me.SetPos(p.Position);
+                    }
                 }
             }
 
@@ -116,7 +121,10 @@ namespace Xww
             {
                 if (p!=Core.Me)
                 {
-                    Core.Me.SetPos(p.Position);
+                    if (ImGui.Button(p.Name.ToString()))
+                    {
+                        Core.Me.SetPos(p.Position);
+                    }
                 }
             }
             // foreach (var p in PartyHelper.Party)
@@ -128,6 +136,45 @@ namespace Xww
             //         // LogHelper.Print(jobdata.Job[p.CurrentJob().ToString()]);
             //     }
             // }
+        }
+
+        public void Tp2(JobViewWindow jobViewWindow)
+        {
+            if (ImGui.Button("A"))
+            {
+                Core.Me.SetPos(xwwhelp.Getflag(0));
+            }
+            if (ImGui.Button("B"))
+            {
+                Core.Me.SetPos(xwwhelp.Getflag(1));
+            }
+            if (ImGui.Button("C"))
+            {
+                Core.Me.SetPos(xwwhelp.Getflag(2));
+            }
+            if (ImGui.Button("D"))
+            {
+                Core.Me.SetPos(xwwhelp.Getflag(3));
+            }
+            if (ImGui.Button("1"))
+            {
+                Core.Me.SetPos(xwwhelp.Getflag(4));
+            }
+            if (ImGui.Button("2"))
+            {
+                Core.Me.SetPos(xwwhelp.Getflag(5));
+            }
+            if (ImGui.Button("3"))
+            {
+                Core.Me.SetPos(xwwhelp.Getflag(6));
+                
+            }
+            if (ImGui.Button("4"))
+            {
+                Core.Me.SetPos(xwwhelp.Getflag(7));
+                
+            }
+            
         }
     } 
 }
