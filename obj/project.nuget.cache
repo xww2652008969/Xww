@@ -1,8 +1,11 @@
 {
   "version": 2,
-  "dgSpecHash": "E5Tf7gvj+Wk=",
+  "dgSpecHash": "3P0vv6d74Hs=",
   "success": true,
   "projectFilePath": "C:\\Users\\w\\source\\repos\\xww\\xww.csproj",
-  "expectedPackageFiles": [],
+  "expectedPackageFiles": [
+    "C:\\Users\\w\\.nuget\\packages\\microsoft.netframework.referenceassemblies\\1.0.3\\microsoft.netframework.referenceassemblies.1.0.3.nupkg.sha512",
+    "C:\\Users\\w\\.nuget\\packages\\microsoft.netframework.referenceassemblies.net461\\1.0.3\\microsoft.netframework.referenceassemblies.net461.1.0.3.nupkg.sha512"
+  ],
   "logs": []
 }
