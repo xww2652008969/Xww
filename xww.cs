@@ -64,7 +64,8 @@ namespace Xww
             QT.AddHotkey("蛇行", new HotKeyResolver_NormalSpell(34646,SpellTargetType.Target));
             QT.AddHotkey("疾跑",new HotKeyResolver_疾跑());
             QT.AddHotkey("牵制",new HotKeyResolver_NormalSpell(7549,SpellTargetType.Target));
-            
+            QT.AddHotkey("LB",new HotKeyResolver_LB());
+            QT.AddHotkey("爆发药",new HotKeyResolver_Potion());
 
 
         }
