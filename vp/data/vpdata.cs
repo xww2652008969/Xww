@@ -1,7 +1,12 @@
-﻿namespace Xww.vp
+﻿using AEAssist.CombatRoutine;
+using AEAssist.CombatRoutine.Module;
+using Dalamud.Plugin;
+using Dalamud.Game.Command;
+namespace Xww.vp
 {
     public static class VpGcdSpellid
     {
+        
         public const uint 咬噬尖齿 = 34606;//状态1
         public const uint 穿裂尖齿 = 34607;//状态1
         public const uint 猛袭利齿 = 34608;//状态2
@@ -81,14 +86,32 @@
     }
     public  class Vpjobdata
     {
-        public static uint LastGcdid { get; set; }
+        public static List<uint> BehindGcd = new List<uint>()
+        {
+            34612,
+            34613,
+            VpGcdSpellid.疾速盘蛇
+
+        };
+
+        public static List<uint> Flankinggcd = new List<uint>()
+        {
+            VpGcdSpellid.侧击獠齿,
+            VpGcdSpellid.侧裂獠齿,
+            VpGcdSpellid.猛袭盘蛇
+        };
+
+        public static bool Tpluck { get; set; }
+        public static uint LastGcdid {get; set; } 
         public static uint LastOffGcdid { get; set; }
         public static uint NextGcdid { get; set; }
         public static bool 蛇0lunck {  get; set; }  //bool表示不能使用
         public static bool 蛇1lunck {  get; set; }//bool 表示不能使用
         public static bool 蛇2lunck {  get; set; }//bool 表示不能用
+        public static Slot nextgcdid { get; set; }
         static Vpjobdata()
         {
+            Tpluck = false;
             LastGcdid = initid();
             LastOffGcdid = initid();
             NextGcdid = initid();
@@ -98,6 +121,7 @@
         }
         public static void recinit()
         {
+            Tpluck = false;
             LastGcdid = initid();
             LastOffGcdid = initid();
             NextGcdid = initid();

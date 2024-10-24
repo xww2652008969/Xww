@@ -3,19 +3,24 @@ using AEAssist.CombatRoutine;
 using AEAssist.CombatRoutine.Module;
 using AEAssist.Extension;
 using AEAssist.Helper;
+using AEAssist.MemoryApi;
+using xww.vp;
 
 namespace Xww.vp;
 
 public class Basegcd : ISlotResolver  //基础连击
 {
-
     public void Build(Slot slot)
     {
-        var spell = GetSpell();
-        if (spell == null)
-            return;
-        slot.Add(spell);
+        slot.Add(GetSpell());
+        Vpjobdata.nextgcdid = slot;
     }
+
+    public Slot getslot(Slot slot)
+    {
+        return slot;
+    }
+
     private Spell GetSpell()
     {
         if (Vphelp.GetLastCombo() == 1)//状态1
@@ -69,8 +74,8 @@ public class Basegcd : ISlotResolver  //基础连击
             {
                 return VpGcdSpellid.侧裂獠齿.GetSpell();
             }
+            return Core.Resolve<MemApiSpell>().CheckActionChange( VpGcdSpellid.背击獠齿.GetSpell().Id).GetSpell();
         }
-
         return VpGcdSpellid.咬噬尖齿.GetSpell();
     }
 
@@ -84,7 +89,7 @@ public class Basegcd : ISlotResolver  //基础连击
         {
             return -100;
         }
-        if (Vphelp.Distance() > 3.0)
+        if (Vphelp.Distance() > JOBSettings.Instance.Maxmeleerange)
         {
             return -3;
         }

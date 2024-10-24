@@ -1,4 +1,5 @@
-﻿using AEAssist;
+﻿using System.Diagnostics;
+using AEAssist;
 using AEAssist.CombatRoutine;
 using AEAssist.CombatRoutine.Module;
 using AEAssist.Extension;
@@ -16,6 +17,9 @@ namespace Xww.vp
             if (s != null) {
                 slot.Add(s);
             }
+            Vpjobdata.nextgcdid = slot;
+            
+            
         }
 
         public int Check()
@@ -24,7 +28,7 @@ namespace Xww.vp
             {
                 return -1001;  
             }
-            if (Vphelp.Distance() > 3.0)
+            if (Vphelp.Distance() > JOBSettings.Instance.Maxmeleerange)
             {
                 return -3;
             }

@@ -11,7 +11,7 @@ public class 飞蛇之牙gcd:ISlotResolver
         {
             return -1001;  
         }
-        if (Vphelp.Distance() > 3.0&& Vphelp.Distance()<=20.0 && VpGcdSpellid.飞蛇之牙.IsReady())
+        if (Vphelp.Distance() >JOBSettings.Instance.Maxmeleerange&& Vphelp.Distance()<=17.0+JOBSettings.Instance.Maxmeleerange && VpGcdSpellid.飞蛇之牙.IsReady())
         {
             return 1;
         }
@@ -21,5 +21,6 @@ public class 飞蛇之牙gcd:ISlotResolver
     public void Build(Slot slot)
     {
         slot.Add(VpGcdSpellid.飞蛇之牙.GetSpell());
+        Vpjobdata.nextgcdid =slot;
     }
 }

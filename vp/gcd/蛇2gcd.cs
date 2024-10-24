@@ -11,13 +11,9 @@ namespace Xww.vp
             if (VpGcdSpellid.猛袭盘蛇.IsReady()&&!VpGcdSpellid.疾速盘蛇.IsReady())
             {
                 Vphelp.Ss2(slot);
+                Vpjobdata.nextgcdid = slot;
                 return;
             }
-            else
-            {
-                slot.Add(VpGcdSpellid.强碎灵蛇.GetSpell());
-            }
-
         }
 
         public int Check()
@@ -26,7 +22,7 @@ namespace Xww.vp
             {
                 return -1001;  
             }
-            if (Vphelp.Distance() > 3.0)
+            if (Vphelp.Distance() > JOBSettings.Instance.Maxmeleerange)
             {
                 return -3;
             }

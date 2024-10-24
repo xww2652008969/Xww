@@ -1,4 +1,5 @@
-﻿using AEAssist;
+﻿using System.Numerics;
+using AEAssist;
 using AEAssist.CombatRoutine.Module;
 using AEAssist.Extension;
 using AEAssist.Helper;
@@ -147,6 +148,66 @@ namespace Xww.vp
             }
 
             return false;
+        }
+
+        public static void Tp()
+        {
+            if (!Core.Me.GetCurrTarget().HasPositional())
+            {
+                return;  //没身位就不tp了
+            }
+            if (!QT.QTGET("TP"))
+            {
+                return;
+            }
+
+            if (Vpjobdata.nextgcdid.Actions.Count == 0)
+            {
+                return;
+            }
+            // if (Vpjobdata.Tpluck)
+            // {
+            //     return;
+            // }
+            float facingAngle = 0f;
+            var aa = Core.Me.Position;
+            var a = Core.Me.GetCurrTarget();
+            Vector3 c;
+            if (Vpjobdata.BehindGcd.Contains(Vpjobdata.nextgcdid.Actions.Peek().Spell.Id))
+            {
+                 facingAngle = a.Rotation + MathF.PI;
+                 if (Core.Resolve<MemApiTarget>().IsBehind)
+                 {
+                     return;
+                 }
+            }
+            
+            if (Vpjobdata.Flankinggcd.Contains(Vpjobdata.nextgcdid.Actions.Peek().Spell.Id))
+            {
+                facingAngle = a.Rotation + MathF.PI / 2;
+                if (Core.Resolve<MemApiTarget>().IsFlanking)
+                {
+                    return;
+                }
+            }
+            
+            if (facingAngle==0f)
+            {
+                return;
+            }
+            float x = MathF.Sin(facingAngle); //x
+            float z = MathF.Cos(facingAngle); //y
+            var b = new Vector3(x, 0, z);
+            c = a.Position+(Vector3.Distance(aa,a.Position)) * b;
+            Core.Me.SetPos(c);
+            LogHelper.Print(JOBSettings.Instance.TpDelay.ToString());
+            // Vpjobdata.Tpluck = true;
+            Task.Delay(JOBSettings.Instance.TpDelay).ContinueWith(_ =>
+            {
+                Core.Me.SetPos(aa);
+                Vpjobdata.Tpluck = false;
+            });
+            
         }
     }
 }

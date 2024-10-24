@@ -16,7 +16,7 @@ namespace Xww.vp
             }
             slot.Add(VpOffGcdSpellid.飞蛇连尾击.GetSpell());
             slot.Add(VpOffGcdSpellid.飞蛇乱尾击.GetSpell());
-
+            Vpjobdata.nextgcdid =slot;
         }
 
         public int Check()
@@ -29,7 +29,7 @@ namespace Xww.vp
             {
                 return -82;
             }
-            if (Vphelp.Distance() > 20.0)
+            if (Vphelp.Distance() > 17.0+JOBSettings.Instance.Maxmeleerange)
             {
                 return -20;
             }

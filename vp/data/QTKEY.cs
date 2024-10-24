@@ -7,6 +7,7 @@ public class Qtkey
     public const string 收尾 = "收尾";
     public const string 停手 = "停手";
     public const string 留资源 = "留资源";
+    public const string TP = "TP";
 }
 public static class QT
 {

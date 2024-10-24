@@ -1,6 +1,7 @@
 ﻿using AEAssist;
 using AEAssist.CombatRoutine.Module;
 using AEAssist.Helper;
+using Xww;
 using Xww.vp;
 
 namespace xww.vp
@@ -23,7 +24,7 @@ namespace xww.vp
             {
                 Vphelp.Ss1(slot);  //防手贱
             }
-
+            Vpjobdata.nextgcdid = slot;
         }
 
         public int Check()
@@ -32,15 +33,11 @@ namespace xww.vp
             {
                 return -1001;  
             }
-            if (Vphelp.Distance() > 3.0)
-            {
-                return -3;
-            }
             if (Vphelp.Checkaoe())
             {
                 return -100;
             }
-            if (Vphelp.Distance() > 3.0)
+            if (Vphelp.Distance() > JOBSettings.Instance.Maxmeleerange)
             {
                 return -3;
             }

@@ -3,8 +3,9 @@ using AEAssist.CombatRoutine;
 using AEAssist.CombatRoutine.Module;
 using AEAssist.Extension;
 using AEAssist.Helper;
+using Xww.vp;
 
-namespace Xww.vp;
+namespace xww.vp.gcd;
 
 public class Vpaoe:ISlotResolver
 {

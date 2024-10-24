@@ -3,7 +3,9 @@ using AEAssist.CombatRoutine;
 using AEAssist.CombatRoutine.Module;
 using AEAssist.CombatRoutine.View;
 using AEAssist.Extension;
+using AEAssist.MemoryApi;
 using ImGuiNET;
+using Xww;
 using Xww.vp;
 
 namespace xww.vp
@@ -12,8 +14,6 @@ namespace xww.vp
     {
         public void AfterSpell(Slot slot, Spell spell)
         {
-            
-            
             Vphelp.Lastgcdid(spell.Id);
             if (spell.Id == VpGcdSpellid.强碎灵蛇 || spell.Id == VpGcdSpellid.猛袭盘蛇 || spell.Id == VpGcdSpellid.疾速盘蛇)
             {
@@ -23,10 +23,14 @@ namespace xww.vp
 
         public void OnBattleUpdate(int currTimeInMs)
         {
+            
+           
             if (QT.QTGET("留资源"))
             {
                 QT.QTSET("收尾",false);  //资源互斥
             }
+             Vphelp.Tp();  //tp
+            
             if (Core.Me.HasAura(Vpbuff.祖灵降临buff)||Core.Me.HasAura(Vpbuff.真北))
             {
                 MeleePosHelper.Draw(MeleePosHelper.Pos.Flank,0);
@@ -60,7 +64,7 @@ namespace xww.vp
 
         public void OnEnterRotation()
         {
-            Core.Resolve<global::AEAssist.MemoryApi.MemApiChatMessage>().Toast2("欢迎使用蝰蛇绿色ACR\n目前适合普通日随\n有些副本有需要停手的请qt选择停手\n目前也适合打7.0的2个极神\nTP队友功能别乱用哦，别乱用哦",1,6000);
+            Core.Resolve<global::AEAssist.MemoryApi.MemApiChatMessage>().Toast2("欢迎使用蝰蛇绿色ACR\n目前适合普通日随\n有些副本有需要停手的请qt选择停手\n目前也适合打7.0的2个极神\nTP功能别乱用哦，别乱用哦",1,6000);
             return;
         }
 

@@ -41,6 +41,7 @@ public class 蛇aoe:ISlotResolver
     public void Build(Slot slot)
     {
         GetSpell(slot);
+        Vpjobdata.nextgcdid = slot;
     }
 
     private static void GetSpell(Slot slot)

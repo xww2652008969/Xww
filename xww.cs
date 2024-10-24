@@ -7,20 +7,22 @@ using Dalamud.Game.Command;
 using AEAssist.CombatRoutine.View.JobView;
 using AEAssist.CombatRoutine.View.JobView.HotkeyResolver;
 using AEAssist.Extension;
+using AEAssist.GUI;
 using AEAssist.Helper;
+using AEAssist.MemoryApi;
 using ImGuiNET;
 using xww.vp;
 using Xww.vp;
+using xww.vp.gcd;
 
 namespace Xww
 {
-    public class Viper : IRotationEntry
+    public  class Viper : IRotationEntry
     {
-        
+        private int a = 10;
         public string AuthorName { get; set; } = "xww";
         public string OverlayTitle { get; } = "这个好像是标题";
         public Rotation Build(string settingFolder)
-
         {
             
             JOBSettings.Build(settingFolder);
@@ -49,8 +51,15 @@ namespace Xww
         }
         public void BuildQT()
         {
+         
             Viper.QT = new JobViewWindow(JOBSettings.Instance.JobViewSave, JOBSettings.Instance.Save, OverlayTitle);
-            // Viper.QT.AddTab("通用", DrawQtGeneral);
+
+            if (AEAssist.Share.LocalContentId == "18014469510992065")
+            {
+                QT.AddTab("dev", dev);  //开发者查看信息用的
+            }
+            
+             QT.AddTab("全局设置",Setting);
             QT.AddTab("TP队友",Tp);
             QT.AddTab("TPB标点",Tp2);
             Viper.QT.AddQt(Qtkey.动态真北,true,"动态真北");
@@ -58,6 +67,7 @@ namespace Xww
             Viper.QT.AddQt(Qtkey.飞蛇之尾,true,"过远就飞蛇尾");
             Viper.QT.AddQt(Qtkey.停手, false,"停手不打技能");
             Viper.QT.AddQt(Qtkey.留资源,false,"保留资源不打小怪");
+            QT.AddQt(Qtkey.TP,false,"开全tp");
             QT.AddHotkey("内丹", new HotKeyResolver_NormalSpell(7541,SpellTargetType.Self));
             QT.AddHotkey("亲疏自行", new HotKeyResolver_NormalSpell(7548,SpellTargetType.Self));
             QT.AddHotkey("浴血", new HotKeyResolver_NormalSpell(7542,SpellTargetType.Self));
@@ -69,10 +79,15 @@ namespace Xww
 
 
         }
+        public void Setting(JobViewWindow jobViewWindow)
+        {
+            OnDrawSetting();
+        }
         public void OnDrawSetting()
         {
             settingUI.Draw();
         }
+        
         public List<SlotResolverData> ViperSlotResolvers = new()
         {
              new(new 祖灵gcd(),SlotMode.Gcd),
@@ -87,11 +102,21 @@ namespace Xww
            new(new Offgcd(),SlotMode.OffGcd), 
            new(new 蛇灵气offgcd(),SlotMode.OffGcd),
         };
-        public void DrawQtGeneral(JobViewWindow jobViewWindow)
+        public static void dev(JobViewWindow jobViewWindow)
         {
-            // ImGui.TextUnformatted("画通用信息");
+            ImGui.TextDisabled(Vphelp.Distance().ToString());
+            // JOBSettings i = JOBSettings.Instance;
+            // ImGui.Text(i.TpDelay.ToString());
+            // ImGui.TextUnformatted(Core.Me.Position.ToString());
+            // ImGui.TextUnformatted("GCD冷却剩余" + GCDHelper.GetGCDCooldown().ToString());
+            // if (Vpjobdata.nextgcdid.Actions.Count!=0)
+            // {
+            //     ImGui.TextUnformatted("下一个GCD:"+Core.Resolve<MemApiSpell>().GetName(Vpjobdata.nextgcdid.Actions.Peek().Spell.Id));
+            // }
+            // ImGui.TextUnformatted(Vphelp.Distance().ToString());
+            // ImGui.TextUnformatted(Core.Me.GetCurrTarget().HitboxRadius.ToString());
         }
-
+        
         public void Tp(JobViewWindow jobViewWindow)
         {
             
