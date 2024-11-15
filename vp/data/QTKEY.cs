@@ -1,3 +1,5 @@
+using xww.vp.gui;
+
 namespace Xww.vp;
 
 public class Qtkey
@@ -11,6 +13,6 @@ public class Qtkey
 }
 public static class QT
 {
-    public static bool QTGET(string qtName) => Viper.QT.GetQt(qtName);
-    public static bool QTSET(string qtName, bool qtValue) => Viper.QT.SetQt(qtName, qtValue);
+    public static bool QTGET(string qtName) => Gui.Vpgui.GetQt(qtName);
+    public static bool QTSET(string qtName, bool qtValue) =>  Gui.Vpgui.SetQt(qtName, qtValue);
 }

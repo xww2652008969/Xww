@@ -137,6 +137,10 @@ namespace Xww.vp
 
         public static float Distance()//计算目标到自己距离
         {
+            if (Core.Me.GetCurrTarget() == null)
+            {
+                return 0f;
+            }
             return Core.Me.GetCurrTarget().Distance(Core.Me);
         }
 
@@ -146,7 +150,6 @@ namespace Xww.vp
             {
                 return true;
             }
-
             return false;
         }
 
@@ -165,10 +168,6 @@ namespace Xww.vp
             {
                 return;
             }
-            // if (Vpjobdata.Tpluck)
-            // {
-            //     return;
-            // }
             float facingAngle = 0f;
             var aa = Core.Me.Position;
             var a = Core.Me.GetCurrTarget();
@@ -200,7 +199,6 @@ namespace Xww.vp
             var b = new Vector3(x, 0, z);
             c = a.Position+(Vector3.Distance(aa,a.Position)) * b;
             Core.Me.SetPos(c);
-            LogHelper.Print(JOBSettings.Instance.TpDelay.ToString());
             // Vpjobdata.Tpluck = true;
             Task.Delay(JOBSettings.Instance.TpDelay).ContinueWith(_ =>
             {

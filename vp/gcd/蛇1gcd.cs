@@ -10,7 +10,7 @@ namespace xww.vp
     {
         public void Build(Slot slot)
         {
-            if (VpGcdSpellid.猛袭盘蛇.IsReady()||VpGcdSpellid.疾速盘蛇.IsReady())
+            if (VpGcdSpellid.猛袭盘蛇.GetSpell().IsReadyWithCanCast()||VpGcdSpellid.疾速盘蛇.GetSpell().IsReadyWithCanCast())
             {
                 Vphelp.Ss1(slot);
             }
@@ -20,7 +20,7 @@ namespace xww.vp
                
             }
 
-            if (VpGcdSpellid.疾速盘蛇.IsReady() && !VpGcdSpellid.猛袭盘蛇.IsReady())
+            if (VpGcdSpellid.疾速盘蛇.GetSpell().IsReadyWithCanCast() && !VpGcdSpellid.猛袭盘蛇.GetSpell().IsReadyWithCanCast())
             {
                 Vphelp.Ss1(slot);  //防手贱
             }
@@ -45,20 +45,20 @@ namespace xww.vp
             {
                 return -65;
             }
-            if (VpGcdSpellid.疾速盘蛇.IsReady()&& VpGcdSpellid.猛袭盘蛇.IsReady())
+            if (VpGcdSpellid.疾速盘蛇.GetSpell().IsReadyWithCanCast()&& VpGcdSpellid.猛袭盘蛇.GetSpell().IsReadyWithCanCast())
             {
                 return 2;
             }
-            if (VpGcdSpellid.疾速盘蛇.IsReady()&& !VpGcdSpellid.猛袭盘蛇.IsReady())
+            if (VpGcdSpellid.疾速盘蛇.GetSpell().IsReadyWithCanCast()&& !VpGcdSpellid.猛袭盘蛇.GetSpell().IsReadyWithCanCast())
             {
                 return 3;
             }
-            if (!VpGcdSpellid.疾速盘蛇.IsReady()&& VpGcdSpellid.猛袭盘蛇.IsReady())
+            if (!VpGcdSpellid.疾速盘蛇.GetSpell().IsReadyWithCanCast()&& VpGcdSpellid.猛袭盘蛇.GetSpell().IsReadyWithCanCast())
             {
                 return -3;
             }
 
-            if (QT.QTGET("留资源")&&!VpGcdSpellid.猛袭盘蛇.IsReady()&&!VpGcdSpellid.疾速盘蛇.IsReady())
+            if (QT.QTGET("留资源")&&!VpGcdSpellid.猛袭盘蛇.GetSpell().IsReadyWithCanCast()&&!VpGcdSpellid.疾速盘蛇.GetSpell().IsReadyWithCanCast())
             {
                 return -20;
             }
@@ -66,7 +66,7 @@ namespace xww.vp
             {
                 return 1;
             }
-            if (1.75 <=Vphelp.GetVicewinderCharges() && Vphelp.GetVicewinderCharges() <= 2.0)  //不让蛇连击溢出
+            if (Vphelp.GetVicewinderCharges()>=JOBSettings.Instance.Maxshelian)  //大于蛇连设定值就打
             {
                 return 1;
             }

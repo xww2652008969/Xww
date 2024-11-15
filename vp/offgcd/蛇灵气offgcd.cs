@@ -29,7 +29,7 @@ namespace Xww.vp
             {
                 return -20;
             }
-            if (VpOffGcdSpellid.蛇灵气.IsReady()&& Core.Resolve<JobApi_Viper>().RattlingCoilStacks<3)
+            if (VpOffGcdSpellid.蛇灵气.GetSpell().IsReadyWithCanCast()&& Core.Resolve<JobApi_Viper>().RattlingCoilStacks<3)
             {
                 return 1;
             }

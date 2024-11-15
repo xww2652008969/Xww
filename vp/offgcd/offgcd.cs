@@ -22,7 +22,7 @@ namespace Xww.vp
             {
                 return -1001;  
             }
-            if (Core.Resolve<MemApiSpell>().CheckActionChange(VpOffGcdSpellid.蛇尾术).IsReady())
+            if (Core.Resolve<MemApiSpell>().CheckActionChange(VpOffGcdSpellid.蛇尾术).GetSpell().IsReadyWithCanCast())
             {
                 return 1;  
             }

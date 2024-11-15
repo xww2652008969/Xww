@@ -1,18 +1,15 @@
-﻿using System;
-using System.IO;
 using AEAssist.CombatRoutine.View.JobView;
 using AEAssist.Helper;
 using AEAssist.IO;
-using AEAssist;
-namespace Xww;
 
+namespace xww.dancer;
 public class JOBSettings
 {
     public static JOBSettings Instance;
     private static string path;
     public static void Build(string settingPath)
     {
-        path = Path.Combine(settingPath, "xwwvp", ".json");
+        path = Path.Combine(settingPath, "xwwdan", ".json");
         if (!File.Exists(path))
         {
             Instance = new JOBSettings();
@@ -30,10 +27,8 @@ public class JOBSettings
         }
     }
     public JobViewSave JobViewSave = new(); // QT设置存档
-    public int TpDelay ;//tp后返回时间
-    public float Maxmeleerange;  //最远近战距离
-    public float Maxshelian;//蛇连最大充能时间
-    public int Maxfeishe;//飞蛇最大充能
+    public int Maxlinli;//伶俐最大
+    public bool Autowuban;
     public void Save()
     {
         Directory.CreateDirectory(Path.GetDirectoryName(path));

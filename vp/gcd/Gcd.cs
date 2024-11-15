@@ -15,11 +15,7 @@ public class Basegcd : ISlotResolver  //基础连击
         slot.Add(GetSpell());
         Vpjobdata.nextgcdid = slot;
     }
-
-    public Slot getslot(Slot slot)
-    {
-        return slot;
-    }
+    
 
     private Spell GetSpell()
     {
@@ -93,7 +89,7 @@ public class Basegcd : ISlotResolver  //基础连击
         {
             return -3;
         }
-        if((VpGcdSpellid.猛袭盘蛇.IsReady() || VpGcdSpellid.疾速盘蛇.IsReady()))
+        if((VpGcdSpellid.猛袭盘蛇.GetSpell().IsReadyWithCanCast()|| VpGcdSpellid.疾速盘蛇.GetSpell().IsReadyWithCanCast()))
         {
             return -3;   //如果使用连连击后  禁止使用基础连击打断
         }

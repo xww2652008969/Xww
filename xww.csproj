@@ -34,6 +34,9 @@
     <Reference Include="Dalamud">
       <HintPath>C:\Users\xww\AppData\Roaming\XIVLauncherCN\addon\Hooks\dev\Dalamud.dll</HintPath>
     </Reference>
+    <Reference Include="ECommons">
+      <HintPath>..\..\..\..\..\ff\ae\AEAssistCNVersion\AEAssist\ECommons.dll</HintPath>
+    </Reference>
     <Reference Include="HSS">
       <HintPath>D:\ff\ae\ACR\HSS\HSS.dll</HintPath>
     </Reference>

@@ -32,12 +32,16 @@ namespace Xww.vp
             {
                 return -3;
             }
+
+            if (Core.Resolve<JobApi_Viper>().SerpentOffering == 100) //不能溢出资源
+            {
+                return 1;
+            }
             if (!Core.Me.HasAura(Vpbuff.疾速) ||! Core.Me.HasAura(Vpbuff.猛袭))
             {
                 return -2;  //没buff 还想打爆发？？？
             }
-
-            if ((VpGcdSpellid.猛袭盘蛇.IsReady() || VpGcdSpellid.猛袭盘蝰.IsReady() || VpGcdSpellid.疾速盘蛇.IsReady() || VpGcdSpellid.疾速盘蝰.IsReady())&&!Core.Me.HasAura(Vpbuff.祖灵降临buff))
+            if ((VpGcdSpellid.猛袭盘蛇.GetSpell().IsReadyWithCanCast()|| VpGcdSpellid.猛袭盘蝰.GetSpell().IsReadyWithCanCast()|| VpGcdSpellid.疾速盘蛇.GetSpell().IsReadyWithCanCast() || VpGcdSpellid.疾速盘蝰.GetSpell().IsReadyWithCanCast())&&!Core.Me.HasAura(Vpbuff.祖灵降临buff))
             {
                 return -1;  //会断蛇连 优先蛇
             }

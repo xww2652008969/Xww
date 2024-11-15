@@ -21,12 +21,12 @@ public class 蛇aoe:ISlotResolver
         {
             return -70;
         }
-        if (VpGcdSpellid.疾速盘蝰.IsReady() || VpGcdSpellid.猛袭盘蝰.IsReady())
+        if (VpGcdSpellid.疾速盘蝰.GetSpell().IsReadyWithCanCast() || VpGcdSpellid.猛袭盘蝰.GetSpell().IsReadyWithCanCast())
         {
             return 2;
         }
 
-        if (QT.QTGET("留资源")&&(!VpGcdSpellid.疾速盘蝰.IsReady() || !VpGcdSpellid.猛袭盘蝰.IsReady()))
+        if (QT.QTGET("留资源")&&(!VpGcdSpellid.疾速盘蝰.GetSpell().IsReadyWithCanCast() || !VpGcdSpellid.猛袭盘蝰.GetSpell().IsReadyWithCanCast()))
         {
             return -20;
         }
@@ -46,13 +46,13 @@ public class 蛇aoe:ISlotResolver
 
     private static void GetSpell(Slot slot)
     {
-        if (VpGcdSpellid.疾速盘蝰.IsReady())
+        if (VpGcdSpellid.疾速盘蝰.GetSpell().IsReadyWithCanCast())
         {
              Vphelp.ss1aoe(slot);
              return;
         }
 
-        if (VpGcdSpellid.猛袭盘蝰.IsReady())
+        if (VpGcdSpellid.猛袭盘蝰.GetSpell().IsReadyWithCanCast())
         {
            Vphelp.ss2aoe(slot);
            return;

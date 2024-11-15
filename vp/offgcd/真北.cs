@@ -28,8 +28,7 @@ public class 真北:ISlotResolver
             return -8;
         }
         
-        var t1 = (Core.Resolve<MemApiSpellCastSuccess>().LastGcdSuccesTime + 2000 - TimeHelper.Now()) < 2000;
-        if (Core.Me.GetCurrTarget().HasPositional() && t1)//身位判断
+        if (Core.Me.GetCurrTarget().HasPositional()&& GCDHelper.GetGCDCooldown()<600)//身位判断
         {
             if ( Vpjobdata.LastGcdid != VpGcdSpellid.强碎灵蛇 && (Vpjobdata.蛇1lunck && Vpjobdata.蛇0lunck && Vpjobdata.蛇2lunck)&&!Core.Me.HasAura(Vpbuff.祖灵降临buff) && Vphelp.GetLastCombo()==3)//不打蛇连且不在祖灵状态
             {

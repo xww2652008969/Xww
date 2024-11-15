@@ -48,7 +48,7 @@ namespace Xww.vp
             {
                 return 3;
             }
-            if (Core.Resolve<JobApi_Viper>().RattlingCoilStacks >=2)  //保留一层
+            if (Core.Resolve<JobApi_Viper>().RattlingCoilStacks>=JOBSettings.Instance.Maxfeishe&&Core.Resolve<JobApi_Viper>().RattlingCoilStacks!=0)  
             {
                 return 1;  
             }

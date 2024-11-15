@@ -3,6 +3,7 @@ using System.Numerics;
 using AEAssist;
 using AEAssist.CombatRoutine;
 using AEAssist.CombatRoutine.Module;
+using AEAssist.CombatRoutine.Module.Opener;
 using Dalamud.Game.Command;
 using AEAssist.CombatRoutine.View.JobView;
 using AEAssist.CombatRoutine.View.JobView.HotkeyResolver;
@@ -11,23 +12,24 @@ using AEAssist.GUI;
 using AEAssist.Helper;
 using AEAssist.MemoryApi;
 using ImGuiNET;
+using xww.dancer;
+using xww.dancer.Opener;
 using xww.vp;
 using Xww.vp;
 using xww.vp.gcd;
+using xww.vp.gui;
 
 namespace Xww
 {
     public  class Viper : IRotationEntry
     {
-        private int a = 10;
         public string AuthorName { get; set; } = "xww";
-        public string OverlayTitle { get; } = "这个好像是标题";
         public Rotation Build(string settingFolder)
         {
             
             JOBSettings.Build(settingFolder);
-            BuildQT();
-            Rotation rot = new Rotation(ViperSlotResolvers)
+            Gui.Build();
+            Rotation rot = new Rotation(xww.vp.Slotlist.ViperSlotResolvers)
             {
                 TargetJob = Jobs.Viper,
                 AcrType = AcrType.Normal,
@@ -43,164 +45,54 @@ namespace Xww
         {
            
         }
-        public static JobViewWindow QT { get; private set; }
-        private Jobui settingUI = new();
-        public IRotationUI GetRotationUI()
+        public  IRotationUI GetRotationUI()
         {
-            return QT;
+         return Gui.Vpgui;
         }
-        public void BuildQT()
-        {
-         
-            Viper.QT = new JobViewWindow(JOBSettings.Instance.JobViewSave, JOBSettings.Instance.Save, OverlayTitle);
 
-            if (AEAssist.Share.LocalContentId == "18014469510992065")
-            {
-                QT.AddTab("dev", dev);  //开发者查看信息用的
-            }
-            
-             QT.AddTab("全局设置",Setting);
-            QT.AddTab("TP队友",Tp);
-            QT.AddTab("TPB标点",Tp2);
-            Viper.QT.AddQt(Qtkey.动态真北,true,"动态真北");
-            Viper.QT.AddQt(Qtkey.收尾,false,"倾斜资源");
-            Viper.QT.AddQt(Qtkey.飞蛇之尾,true,"过远就飞蛇尾");
-            Viper.QT.AddQt(Qtkey.停手, false,"停手不打技能");
-            Viper.QT.AddQt(Qtkey.留资源,false,"保留资源不打小怪");
-            QT.AddQt(Qtkey.TP,false,"开全tp");
-            QT.AddHotkey("内丹", new HotKeyResolver_NormalSpell(7541,SpellTargetType.Self));
-            QT.AddHotkey("亲疏自行", new HotKeyResolver_NormalSpell(7548,SpellTargetType.Self));
-            QT.AddHotkey("浴血", new HotKeyResolver_NormalSpell(7542,SpellTargetType.Self));
-            QT.AddHotkey("蛇行", new HotKeyResolver_NormalSpell(34646,SpellTargetType.Target));
-            QT.AddHotkey("疾跑",new HotKeyResolver_疾跑());
-            QT.AddHotkey("牵制",new HotKeyResolver_NormalSpell(7549,SpellTargetType.Target));
-            QT.AddHotkey("LB",new HotKeyResolver_LB());
-            QT.AddHotkey("爆发药",new HotKeyResolver_Potion());
-
-
-        }
-        public void Setting(JobViewWindow jobViewWindow)
-        {
-            OnDrawSetting();
-        }
         public void OnDrawSetting()
         {
-            settingUI.Draw();
-        }
-        
-        public List<SlotResolverData> ViperSlotResolvers = new()
-        {
-             new(new 祖灵gcd(),SlotMode.Gcd),
-            new(new 蛇1gcd(),SlotMode.Gcd),    //蛇连击优先级高
-           new(new 蛇2gcd(),SlotMode.Gcd),
-           new SlotResolverData(new 蛇aoe(),SlotMode.Gcd),
-           new(new 飞蛇gcd(),SlotMode.Gcd),
-           new SlotResolverData(new 飞蛇之牙gcd(),SlotMode.Gcd),
-           new(new Basegcd(),SlotMode.Gcd),
-           new(new Vpaoe(),SlotMode.Gcd),
-            new SlotResolverData(new 真北(),SlotMode.OffGcd),
-           new(new Offgcd(),SlotMode.OffGcd), 
-           new(new 蛇灵气offgcd(),SlotMode.OffGcd),
-        };
-        public static void dev(JobViewWindow jobViewWindow)
-        {
-            ImGui.TextDisabled(Vphelp.Distance().ToString());
-            // JOBSettings i = JOBSettings.Instance;
-            // ImGui.Text(i.TpDelay.ToString());
-            // ImGui.TextUnformatted(Core.Me.Position.ToString());
-            // ImGui.TextUnformatted("GCD冷却剩余" + GCDHelper.GetGCDCooldown().ToString());
-            // if (Vpjobdata.nextgcdid.Actions.Count!=0)
-            // {
-            //     ImGui.TextUnformatted("下一个GCD:"+Core.Resolve<MemApiSpell>().GetName(Vpjobdata.nextgcdid.Actions.Peek().Spell.Id));
-            // }
-            // ImGui.TextUnformatted(Vphelp.Distance().ToString());
-            // ImGui.TextUnformatted(Core.Me.GetCurrTarget().HitboxRadius.ToString());
-        }
-        
-        public void Tp(JobViewWindow jobViewWindow)
-        {
-            
-            foreach (var p in PartyHelper.CastableTanks)
-            {
-                
-                if (p!=Core.Me)
-                {
-                    if (ImGui.Button(p.Name.ToString()))
-                    {
-                        Core.Me.SetPos(p.Position);
-                    }
-                }
-            }
-
-            foreach (var p in PartyHelper.CastableHealers)
-            {
-                if (p!=Core.Me)
-                {
-                    if (ImGui.Button(p.Name.ToString()))
-                    {
-                        Core.Me.SetPos(p.Position);
-                    }
-                }
-            }
-
-            foreach (var p in PartyHelper.CastableDps)
-            {
-                if (p!=Core.Me)
-                {
-                    if (ImGui.Button(p.Name.ToString()))
-                    {
-                        Core.Me.SetPos(p.Position);
-                    }
-                }
-            }
-            // foreach (var p in PartyHelper.Party)
-            // {
-            //     
-            //     if (ImGui.Button(p.Name.ToString()))
-            //     {
-            //         
-            //         // LogHelper.Print(jobdata.Job[p.CurrentJob().ToString()]);
-            //     }
-            // }
-        }
-
-        public void Tp2(JobViewWindow jobViewWindow)
-        {
-            if (ImGui.Button("A"))
-            {
-                Core.Me.SetPos(xwwhelp.Getflag(0));
-            }
-            if (ImGui.Button("B"))
-            {
-                Core.Me.SetPos(xwwhelp.Getflag(1));
-            }
-            if (ImGui.Button("C"))
-            {
-                Core.Me.SetPos(xwwhelp.Getflag(2));
-            }
-            if (ImGui.Button("D"))
-            {
-                Core.Me.SetPos(xwwhelp.Getflag(3));
-            }
-            if (ImGui.Button("1"))
-            {
-                Core.Me.SetPos(xwwhelp.Getflag(4));
-            }
-            if (ImGui.Button("2"))
-            {
-                Core.Me.SetPos(xwwhelp.Getflag(5));
-            }
-            if (ImGui.Button("3"))
-            {
-                Core.Me.SetPos(xwwhelp.Getflag(6));
-                
-            }
-            if (ImGui.Button("4"))
-            {
-                Core.Me.SetPos(xwwhelp.Getflag(7));
-                
-            }
             
         }
+        
     } 
+    public class Dancer: IRotationEntry
+    {
+        public void Dispose()
+        {
+        }
+
+        public Rotation? Build(string settingFolder)
+        {
+            xww.dancer.JOBSettings.Build(settingFolder);
+            xww.dancer.gui.Gui.Build();
+            Rotation rot = new Rotation(xww.dancer.Slotlist.DancerSlotResolvers)
+            {
+                TargetJob = Jobs.Dancer,
+                AcrType = AcrType.Normal,
+                MaxLevel = 100,
+                MinLevel = 1,
+                Description="日随用1-100\n初始"
+            };
+            rot.SetRotationEventHandler(new danevent());
+            rot.AddOpener(GetOpener);
+            return rot;
+        }
+        
+
+        IOpener? GetOpener(uint level)
+        {
+            return new IOpener100();
+        }
+        public IRotationUI GetRotationUI()
+        {
+            return xww.dancer.gui.Gui.dangui;
+        }
+
+        public void OnDrawSetting()
+        {
+        }
+
+        public string AuthorName { get; set; } = "Xww";
+    }
 }
