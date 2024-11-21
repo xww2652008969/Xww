@@ -4,6 +4,7 @@ using AEAssist;
 using AEAssist.CombatRoutine;
 using AEAssist.CombatRoutine.Module;
 using AEAssist.CombatRoutine.Module.Opener;
+using AEAssist.CombatRoutine.Trigger;
 using Dalamud.Game.Command;
 using AEAssist.CombatRoutine.View.JobView;
 using AEAssist.CombatRoutine.View.JobView.HotkeyResolver;
@@ -38,9 +39,16 @@ namespace Xww
                 Description="日随用1-100\n没有智能停手，可以在QT控制停手\n后面会更新"
             };
             rot.SetRotationEventHandler(new Vpenevt());
+            rot.AddTriggerAction(new xww.vp.Triggers.TriggerAction_QT());
+            rot.AddTriggerAction(new xww.vp.Triggers.TriggerAction_jobset());
+            rot.AddOpener(GetOpener);
             return rot;
         }
 
+        IOpener? GetOpener(uint level)
+        {
+            return new vp100op();
+        }
         public void Dispose()
         {
            

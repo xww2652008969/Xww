@@ -2,6 +2,8 @@ using AEAssist;
 using AEAssist.CombatRoutine;
 using AEAssist.CombatRoutine.Module;
 using AEAssist.MemoryApi;
+using Dalamud.Utility;
+
 namespace xww.dancer;
 
 public class danevent:IRotationEventHandler
@@ -28,13 +30,11 @@ public class danevent:IRotationEventHandler
 
     public void AfterSpell(Slot slot, Spell spell)
     {
-       
+        danhelp.Auto舞伴();
     }
 
     public void OnBattleUpdate(int currTimeInMs)
     {
-        //自动舞伴
-        danhelp.Auto舞伴();
     }
 
     public void OnEnterRotation()
@@ -53,9 +53,9 @@ public class danevent:IRotationEventHandler
         {
             Task.Delay(5000).ContinueWith(_ =>
             {
-                Core.Resolve<MemApiChatMessage>().Toast2("进本了喵\n由于你没关闭自动舞伴\n待会儿会自动帮你绑定舞伴喵",1,6000);
+                Core.Resolve<MemApiChatMessage>().Toast2("进本了喵",1,6000);
             });
-            Task.Delay(15000).ContinueWith(_ =>
+            Task.Delay(7000).ContinueWith(_ =>
             {
                danhelp.Auto舞伴();
             });

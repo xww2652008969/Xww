@@ -5,6 +5,7 @@ using AEAssist.Extension;
 using AEAssist.Helper;
 using AEAssist.JobApi;
 using AEAssist.MemoryApi;
+using Xww;
 using xww.dancer.data;
 
 namespace xww.dancer;
@@ -32,14 +33,15 @@ public class danhelp
         {
             return;
         }
+        LogHelper.Print("qqq");
         var dps = PartyHelper.CastableDps;
         var t = PartyHelper.CastableTanks;
         var h = PartyHelper.CastableHealers;
         var p = PartyHelper.Party;
         var i = PartyHelper.Party.Count;
-        AI.Instance.BattleData.NextSlot = new Slot();
-        if (i == 2)
+        if (i == 2 && new Spell(danoffgcd.闭式舞姿,p[1]).IsReadyWithCanCast())
         {
+            AI.Instance.BattleData.NextSlot = new Slot();
             AI.Instance.BattleData.NextSlot.Add(new Spell(danoffgcd.闭式舞姿,p[1]));
             return;
         }
@@ -48,24 +50,27 @@ public class danhelp
         {
             foreach (var dd in dps)
             {
-                if (dd != Core.Me &&!dd.HasAura(danbuff.舞伴))
+                if (dd != Core.Me &&!dd.HasAura(danbuff.舞伴)&& new Spell(danoffgcd.闭式舞姿,dd).IsReadyWithCanCast())
                 {
+                    AI.Instance.BattleData.NextSlot = new Slot();
                     AI.Instance.BattleData.NextSlot.Add(new Spell(danoffgcd.闭式舞姿,dd));
                     return;
                 }
             }
             foreach (var dd in t)
             {
-                if (dd != Core.Me &&!dd.HasAura(danbuff.舞伴))
+                if (dd != Core.Me &&!dd.HasAura(danbuff.舞伴)&&new Spell(danoffgcd.闭式舞姿,dd).IsReadyWithCanCast())
                 {
+                    AI.Instance.BattleData.NextSlot = new Slot();
                     AI.Instance.BattleData.NextSlot.Add(new Spell(danoffgcd.闭式舞姿,dd));
                     return;
                 }
             }
             foreach (var dd in h)
             {
-                if (dd != Core.Me &&!dd.HasAura(danbuff.舞伴))
+                if (dd != Core.Me &&!dd.HasAura(danbuff.舞伴)&& new Spell(danoffgcd.闭式舞姿,dd).IsReadyWithCanCast())
                 {
+                    AI.Instance.BattleData.NextSlot = new Slot();
                     AI.Instance.BattleData.NextSlot.Add(new Spell(danoffgcd.闭式舞姿,dd));
                     return;
                 }

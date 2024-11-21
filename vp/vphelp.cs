@@ -3,6 +3,7 @@ using AEAssist;
 using AEAssist.CombatRoutine.Module;
 using AEAssist.Extension;
 using AEAssist.Helper;
+using AEAssist.JobApi;
 using AEAssist.MemoryApi;
 
 namespace Xww.vp
@@ -153,6 +154,10 @@ namespace Xww.vp
             return false;
         }
 
+        public static int 飞蛇之魂()
+        {
+            return Core.Resolve<JobApi_Viper>().RattlingCoilStacks;
+        }
         public static void Tp()
         {
             if (!Core.Me.GetCurrTarget().HasPositional())

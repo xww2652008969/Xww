@@ -25,6 +25,12 @@ namespace Xww.vp
             {
                 return -1001;  
             }
+
+            if (QT.QTGET("飞蛇之尾")==false)
+            {
+                return -1000;
+            }
+            
             if (Core.Me.Level < 82)
             {
                 return -82;
@@ -42,15 +48,25 @@ namespace Xww.vp
             {
                 return 4;
             }
-            
-            
-            if (QT.QTGET("飞蛇之尾") && Vphelp.Distance() > 3.0&&Core.Resolve<JobApi_Viper>().RattlingCoilStacks>0)
+
+            if (Vphelp.Distance() > JOBSettings.Instance.Maxmeleerange && Vphelp.飞蛇之魂()>0)
             {
                 return 3;
             }
-            if (Core.Resolve<JobApi_Viper>().RattlingCoilStacks>=JOBSettings.Instance.Maxfeishe&&Core.Resolve<JobApi_Viper>().RattlingCoilStacks!=0)  
+            
+            if (xwwhelp.isCurrTriggerLine())
             {
-                return 1;  
+                if (Vphelp.飞蛇之魂() > JOBSettings.Instance.Maxfeishec)
+                {
+                    return 22;   //大于时间轴规定的保留数就释放
+                }
+
+                return -1;
+            }
+
+            if (Vphelp.飞蛇之魂()>JOBSettings.Instance.Maxfeishe)  
+            {
+                return 11;  
             }
             return -1;
         }

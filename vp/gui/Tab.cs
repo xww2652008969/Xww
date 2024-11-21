@@ -1,4 +1,5 @@
 using AEAssist;
+using AEAssist.CombatRoutine.Module;
 using AEAssist.CombatRoutine.View.JobView;
 using AEAssist.Extension;
 using AEAssist.Helper;
@@ -23,8 +24,12 @@ public class Tab
     }
     public static void dev(JobViewWindow jobViewWindow)
     {
-        ImGui.TextDisabled(Vphelp.Distance().ToString());
-        // JOBSettings i = JOBSettings.Instance;
+        if (xwwhelp.isCurrTriggerLine())
+        {
+            ImGui.TextDisabled(xwwhelp.CurrTriggerLine().Name);
+            ImGui.TextDisabled(JOBSettings.Instance.Maxfeishec.ToString());
+
+        } // JOBSettings i = JOBSettings.Instance;
         // ImGui.Text(i.TpDelay.ToString());
         // ImGui.TextUnformatted(Core.Me.Position.ToString());
         // ImGui.TextUnformatted("GCD冷却剩余" + GCDHelper.GetGCDCooldown().ToString());

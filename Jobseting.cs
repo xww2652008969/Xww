@@ -34,6 +34,7 @@ public class JOBSettings
     public float Maxmeleerange;  //最远近战距离
     public float Maxshelian;//蛇连最大充能时间
     public int Maxfeishe;//飞蛇最大充能
+    public int Maxfeishec;//飞蛇时间轴模式
     public void Save()
     {
         Directory.CreateDirectory(Path.GetDirectoryName(path));
