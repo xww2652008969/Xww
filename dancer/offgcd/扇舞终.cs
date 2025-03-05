@@ -1,23 +1,18 @@
 using AEAssist.CombatRoutine.Module;
 using AEAssist.Helper;
+using Xww;
 using xww.dancer.data;
 
 namespace xww.dancer.offgcd;
 
-public class 扇舞终:ISlotResolver
+public class 扇舞终 : ISlotResolver
 {
     public int Check()
     {
-        if (QT.QTGET("停手"))
-        {
-            return -100;
-        }
-        
-        
-        if (danoffgcd.扇舞终.GetSpell().IsReadyWithCanCast())
-        {
-            return 1;
-        }
+        if (QT.QTGET("停手")) return -100;
+        if (xwwhelp.Distance() > 25) return -2;
+
+        if (danoffgcd.扇舞终.GetSpell().IsReadyWithCanCast()) return 1;
 
         return -1;
     }

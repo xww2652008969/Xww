@@ -1,16 +1,15 @@
 using AEAssist.CombatRoutine.View.JobView;
-using AEAssist.Helper;
-using Xww;
 
 namespace xww.dancer.gui;
 
 public class Gui
 {
-    private static string OverlayTitle { get; } = "舞者";
     public static JobViewWindow dangui;
+    private static string OverlayTitle { get; } = "舞者";
+
     public static void Build()
     {
-        dangui=new JobViewWindow(JOBSettings.Instance.JobViewSave, JOBSettings.Instance.Save, OverlayTitle);
+        dangui = new JobViewWindow(JOBSettings.Instance.JobViewSave, JOBSettings.Instance.Save, OverlayTitle);
         Initgui();
     }
 
@@ -20,5 +19,4 @@ public class Gui
         QT.createQT(dangui);
         Tab.CreateTab(dangui);
     }
-    
 }

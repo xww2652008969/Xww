@@ -1,5 +1,3 @@
-using AEAssist.CombatRoutine;
-
 namespace xww.dancer.data;
 
 public class dangcd
@@ -18,7 +16,7 @@ public class dangcd
     public static uint 提拉纳 = 25790;
     public static uint 流星舞 = 25792;
     public static uint 落幕舞 = 36983;
-    
+
     //aoe
     public static uint 风车 = 15993;
     public static uint 落刃雨 = 15994;
@@ -40,7 +38,6 @@ public class danoffgcd
     public static uint 即兴表演 = 16014;
 }
 
-
 public class danbuff
 {
     public const int 对称投掷 = 2693;
@@ -54,9 +51,8 @@ public class danbuff
 
     public const int 闭式舞姿 = 1823;
     public const int 舞伴 = 1824;
-    
-    public const int 落幕舞预备 = 3867;
 
+    public const int 落幕舞预备 = 3867;
 }
 
 public class danjobdata

@@ -11,8 +11,16 @@ public class Qtkey
     public const string 留资源 = "留资源";
     public const string TP = "TP";
 }
+
 public static class QT
 {
-    public static bool QTGET(string qtName) => Gui.Vpgui.GetQt(qtName);
-    public static bool QTSET(string qtName, bool qtValue) =>  Gui.Vpgui.SetQt(qtName, qtValue);
+    public static bool QTGET(string qtName)
+    {
+        return Gui.Vpgui.GetQt(qtName);
+    }
+
+    public static bool QTSET(string qtName, bool qtValue)
+    {
+        return Gui.Vpgui.SetQt(qtName, qtValue);
+    }
 }

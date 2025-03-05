@@ -5,11 +5,12 @@ namespace xww.vp.gui;
 
 public class Gui
 {
-    private static string OverlayTitle { get; } = "这个好像是标题";
     public static JobViewWindow Vpgui;
+    private static string OverlayTitle { get; } = "这个好像是标题";
+
     public static void Build()
     {
-        Vpgui=new JobViewWindow(JOBSettings.Instance.JobViewSave, JOBSettings.Instance.Save, OverlayTitle);
+        Vpgui = new JobViewWindow(JOBSettings.Instance.JobViewSave, JOBSettings.Instance.Save, OverlayTitle);
         Initgui();
     }
 
@@ -19,5 +20,4 @@ public class Gui
         QT.createQT(Vpgui);
         Tab.createTab(Vpgui);
     }
-    
 }

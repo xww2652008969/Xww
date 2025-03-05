@@ -1,9 +1,10 @@
-﻿using System;
-using System.Reflection;
+﻿using System.Reflection;
+
 namespace Xww;
+
 public class ReflectionHelp
 {
-    public static bool IsValueInClass<T>(Type type,T value)
+    public static bool IsValueInClass<T>(Type type, T value)
     {
         {
             var fields = type.GetFields(BindingFlags.Public | BindingFlags.Static | BindingFlags.FlattenHierarchy);
