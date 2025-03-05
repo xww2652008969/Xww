@@ -1,106 +1,94 @@
-﻿
-using System.Numerics;
-using AEAssist;
-using AEAssist.CombatRoutine;
-using AEAssist.CombatRoutine.Module;
+﻿using AEAssist.CombatRoutine;
 using AEAssist.CombatRoutine.Module.Opener;
-using AEAssist.CombatRoutine.Trigger;
-using Dalamud.Game.Command;
-using AEAssist.CombatRoutine.View.JobView;
-using AEAssist.CombatRoutine.View.JobView.HotkeyResolver;
-using AEAssist.Extension;
-using AEAssist.GUI;
-using AEAssist.Helper;
-using AEAssist.MemoryApi;
-using ImGuiNET;
 using xww.dancer;
 using xww.dancer.Opener;
 using xww.vp;
-using Xww.vp;
-using xww.vp.gcd;
 using xww.vp.gui;
+using xww.vp.Triggers;
+using Slotlist = xww.vp.Slotlist;
 
-namespace Xww
+namespace Xww;
+
+public class Viper : IRotationEntry
 {
-    public  class Viper : IRotationEntry
+    public string AuthorName { get; set; } = "xww";
+
+    public Rotation Build(string settingFolder)
     {
-        public string AuthorName { get; set; } = "xww";
-        public Rotation Build(string settingFolder)
+        JOBSettings.Build(settingFolder);
+        Gui.Build();
+        var rot = new Rotation(Slotlist.ViperSlotResolvers)
         {
-            
-            JOBSettings.Build(settingFolder);
-            Gui.Build();
-            Rotation rot = new Rotation(xww.vp.Slotlist.ViperSlotResolvers)
-            {
-                TargetJob = Jobs.Viper,
-                AcrType = AcrType.Normal,
-                MaxLevel = 100,
-                MinLevel = 1,
-                Description="日随用1-100\n没有智能停手，可以在QT控制停手\n后面会更新"
-            };
-            rot.SetRotationEventHandler(new Vpenevt());
-            rot.AddTriggerAction(new xww.vp.Triggers.TriggerAction_QT());
-            rot.AddTriggerAction(new xww.vp.Triggers.TriggerAction_jobset());
-            rot.AddOpener(GetOpener);
-            return rot;
-        }
+            TargetJob = Jobs.Viper,
+            AcrType = AcrType.Normal,
+            MaxLevel = 100,
+            MinLevel = 1,
+            Description = "日随用1-100\n没有智能停手，可以在QT控制停手\n后面会更新"
+        };
+        rot.SetRotationEventHandler(new Vpenevt());
+        rot.AddTriggerAction(new TriggerAction_QT());
+        rot.AddTriggerAction(new TriggerAction_jobset());
+        rot.AddOpener(GetOpener);
+        return rot;
+    }
 
-        IOpener? GetOpener(uint level)
-        {
-            return new vp100op();
-        }
-        public void Dispose()
-        {
-           
-        }
-        public  IRotationUI GetRotationUI()
-        {
-         return Gui.Vpgui;
-        }
-
-        public void OnDrawSetting()
-        {
-            
-        }
-        
-    } 
-    public class Dancer: IRotationEntry
+    public void Dispose()
     {
-        public void Dispose()
-        {
-        }
+    }
 
-        public Rotation? Build(string settingFolder)
-        {
-            xww.dancer.JOBSettings.Build(settingFolder);
-            xww.dancer.gui.Gui.Build();
-            Rotation rot = new Rotation(xww.dancer.Slotlist.DancerSlotResolvers)
-            {
-                TargetJob = Jobs.Dancer,
-                AcrType = AcrType.Normal,
-                MaxLevel = 100,
-                MinLevel = 1,
-                Description="日随用1-100\n初始"
-            };
-            rot.SetRotationEventHandler(new danevent());
-            rot.AddOpener(GetOpener);
-            return rot;
-        }
-        
+    public IRotationUI GetRotationUI()
+    {
+        return Gui.Vpgui;
+    }
 
-        IOpener? GetOpener(uint level)
-        {
-            return new IOpener100();
-        }
-        public IRotationUI GetRotationUI()
-        {
-            return xww.dancer.gui.Gui.dangui;
-        }
+    public void OnDrawSetting()
+    {
+    }
 
-        public void OnDrawSetting()
-        {
-        }
+    private IOpener? GetOpener(uint level)
+    {
+        if (level == 100) return new vp100op();
+        return null;
+    }
+}
 
-        public string AuthorName { get; set; } = "Xww";
+public class Dancer : IRotationEntry
+{
+    public void Dispose()
+    {
+    }
+
+    public Rotation? Build(string settingFolder)
+    {
+        xww.dancer.JOBSettings.Build(settingFolder);
+        xww.dancer.gui.Gui.Build();
+        var rot = new Rotation(xww.dancer.Slotlist.DancerSlotResolvers)
+        {
+            TargetJob = Jobs.Dancer,
+            AcrType = AcrType.Normal,
+            MaxLevel = 100,
+            MinLevel = 1,
+            Description = "日随用1-100\n初始"
+        };
+        rot.SetRotationEventHandler(new danevent());
+        rot.AddOpener(GetOpener);
+        return rot;
+    }
+
+    public IRotationUI GetRotationUI()
+    {
+        return xww.dancer.gui.Gui.dangui;
+    }
+
+    public void OnDrawSetting()
+    {
+    }
+
+    public string AuthorName { get; set; } = "Xww";
+
+
+    private IOpener? GetOpener(uint level)
+    {
+        return new IOpener100();
     }
 }

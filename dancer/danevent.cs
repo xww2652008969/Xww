@@ -2,30 +2,26 @@ using AEAssist;
 using AEAssist.CombatRoutine;
 using AEAssist.CombatRoutine.Module;
 using AEAssist.MemoryApi;
-using Dalamud.Utility;
+using Xww;
 
 namespace xww.dancer;
 
-public class danevent:IRotationEventHandler
+public class danevent : IRotationEventHandler
 {
     public async Task OnPreCombat()
     {
-        
     }
 
     public void OnResetBattle()
     {
-        
     }
 
     public async Task OnNoTarget()
     {
-        
     }
 
     public void OnSpellCastSuccess(Slot slot, Spell spell)
     {
-        
     }
 
     public void AfterSpell(Slot slot, Spell spell)
@@ -39,27 +35,21 @@ public class danevent:IRotationEventHandler
 
     public void OnEnterRotation()
     {
-        Core.Resolve<MemApiChatMessage>().Toast2("欢迎使用舞者acr\n 日常用的，目前在测试 没啥问题就发出来了喵\n还有去悬浮窗设置下自动舞伴喵",1,6000);
+        Core.Resolve<MemApiChatMessage>().Toast2("欢迎使用舞者acr\n 日常用的，目前在测试 没啥问题就发出来了喵\n还有去悬浮窗设置下自动舞伴喵", 1, 6000);
+        xwwmove.rmove(); //注册命令
     }
 
     public void OnExitRotation()
     {
-   
+        xwwmove.rmove(); //注销命令
     }
 
     public void OnTerritoryChanged()
     {
         if (danhelp.Isben())
         {
-            Task.Delay(5000).ContinueWith(_ =>
-            {
-                Core.Resolve<MemApiChatMessage>().Toast2("进本了喵",1,6000);
-            });
-            Task.Delay(7000).ContinueWith(_ =>
-            {
-               danhelp.Auto舞伴();
-            });
+            Task.Delay(5000).ContinueWith(_ => { Core.Resolve<MemApiChatMessage>().Toast2("进本了喵", 1, 6000); });
+            Task.Delay(7000).ContinueWith(_ => { danhelp.Auto舞伴(); });
         }
     }
-    
 }

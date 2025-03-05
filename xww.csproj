@@ -1,61 +1,64 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
-  <PropertyGroup>
-    <TargetFramework>net8.0</TargetFramework>
-    <ImplicitUsings>enable</ImplicitUsings>
-    <Nullable>enable</Nullable>
-    <OutputPath>D:\ff\ae\ACR\Xww</OutputPath>
-    <OutputType>Library</OutputType>
-    <PublishSingleFile>true</PublishSingleFile>
-	  <CopyLocalLockFileAssemblies>false</CopyLocalLockFileAssemblies>
-	  <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
-	  <AppendRuntimeIdentifierToOutputPath>false</AppendRuntimeIdentifierToOutputPath>
-	  <PlatformTarget>x64</PlatformTarget>
-	  <ProduceReferenceAssembly>False</ProduceReferenceAssembly>
-    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
-	  <RunPostBuildEvent>OnOutputUpdated</RunPostBuildEvent>
-  </PropertyGroup>
+    <PropertyGroup>
+        <TargetFramework>net8.0</TargetFramework>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+        <OutputPath>D:\ff\ae\ACR\Xww</OutputPath>
+        <OutputType>Library</OutputType>
+        <PublishSingleFile>true</PublishSingleFile>
+        <CopyLocalLockFileAssemblies>false</CopyLocalLockFileAssemblies>
+        <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
+        <AppendRuntimeIdentifierToOutputPath>false</AppendRuntimeIdentifierToOutputPath>
+        <PlatformTarget>x64</PlatformTarget>
+        <ProduceReferenceAssembly>False</ProduceReferenceAssembly>
+        <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+        <RunPostBuildEvent>OnOutputUpdated</RunPostBuildEvent>
+    </PropertyGroup>
 
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-    <Optimize>True</Optimize>
-    <DebugType>none</DebugType>
-    <GenerateAssemblyInfo>False</GenerateAssemblyInfo>
-  </PropertyGroup>
+    <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+        <Optimize>True</Optimize>
+        <DebugType>none</DebugType>
+        <GenerateAssemblyInfo>False</GenerateAssemblyInfo>
+    </PropertyGroup>
 
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
-    <DebugType>none</DebugType>
-    <GenerateAssemblyInfo>False</GenerateAssemblyInfo>
-  </PropertyGroup>
+    <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+        <DebugType>none</DebugType>
+        <GenerateAssemblyInfo>False</GenerateAssemblyInfo>
+    </PropertyGroup>
 
-  <ItemGroup>
-    <Reference Include="AEAssist">
-      <HintPath>D:\ff\ae\AEAssistCNVersion\AEAssist\AEAssist.dll</HintPath>
-    </Reference>
-    <Reference Include="Dalamud">
-      <HintPath>C:\Users\xww\AppData\Roaming\XIVLauncherCN\addon\Hooks\dev\Dalamud.dll</HintPath>
-    </Reference>
-    <Reference Include="ECommons">
-      <HintPath>..\..\..\..\..\ff\ae\AEAssistCNVersion\AEAssist\ECommons.dll</HintPath>
-    </Reference>
-    <Reference Include="FFXIVClientStructs">
-      <HintPath>C:\Users\xww\AppData\Roaming\XIVLauncherCN\addon\Hooks\dev\FFXIVClientStructs.dll</HintPath>
-    </Reference>
-    <Reference Include="HSS">
-      <HintPath>D:\ff\ae\ACR\HSS\HSS.dll</HintPath>
-    </Reference>
-    <Reference Include="ImGui.NET">
-      <HintPath>C:\Users\xww\AppData\Roaming\XIVLauncherCN\addon\Hooks\dev\ImGui.NET.dll</HintPath>
-    </Reference>
-    <Reference Include="Lumina.Excel">
-      <HintPath>C:\Users\xww\AppData\Roaming\XIVLauncherCN\addon\Hooks\dev\Lumina.Excel.dll</HintPath>
-    </Reference>
-  </ItemGroup>
+    <ItemGroup>
+        <Reference Include="AEAssist">
+            <HintPath>D:\ff\ae\AEAssistCNVersion\AEAssist\AEAssist.dll</HintPath>
+        </Reference>
+        <Reference Include="Dalamud">
+            <HintPath>C:\Users\xww\AppData\Roaming\XIVLauncherCN\addon\Hooks\dev\Dalamud.dll</HintPath>
+        </Reference>
+        <Reference Include="ECommons">
+            <HintPath>..\..\..\..\..\ff\ae\AEAssistCNVersion\AEAssist\ECommons.dll</HintPath>
+        </Reference>
+        <Reference Include="FFXIVClientStructs">
+            <HintPath>C:\Users\xww\AppData\Roaming\XIVLauncherCN\addon\Hooks\dev\FFXIVClientStructs.dll</HintPath>
+        </Reference>
+        <Reference Include="HSS">
+            <HintPath>D:\ff\ae\ACR\HSS\HSS.dll</HintPath>
+        </Reference>
+        <Reference Include="ImGui.NET">
+            <HintPath>C:\Users\xww\AppData\Roaming\XIVLauncherCN\addon\Hooks\dev\ImGui.NET.dll</HintPath>
+        </Reference>
+        <Reference Include="InteropGenerator.Runtime">
+            <HintPath>C:\Users\xww\AppData\Roaming\XIVLauncherCN\addon\Hooks\dev\InteropGenerator.Runtime.dll</HintPath>
+        </Reference>
+        <Reference Include="Lumina.Excel">
+            <HintPath>C:\Users\xww\AppData\Roaming\XIVLauncherCN\addon\Hooks\dev\Lumina.Excel.dll</HintPath>
+        </Reference>
+    </ItemGroup>
 
-  <ItemGroup>
-    <PackageReference Include="Microsoft.NETFramework.ReferenceAssemblies" Version="1.0.3">
-      <PrivateAssets>all</PrivateAssets>
-      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-    </PackageReference>
-  </ItemGroup>
+    <ItemGroup>
+        <PackageReference Include="Microsoft.NETFramework.ReferenceAssemblies" Version="1.0.3">
+            <PrivateAssets>all</PrivateAssets>
+            <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+        </PackageReference>
+    </ItemGroup>
 
 </Project>

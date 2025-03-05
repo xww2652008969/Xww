@@ -6,6 +6,6 @@ public class QT
 {
     public static void createQT(JobViewWindow gui)
     {
-        gui.AddQt("停手",false);
+        gui.AddQt("停手", false);
     }
 }
